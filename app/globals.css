@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9fd;
-  --primary: #442ed1;
-  --secondary: #9c90ec;
-  --accent: #6652ea;
+  --background: #f4f5ff;
+  --primary: #1938fe;
+  --secondary: #fe696e;
+  --accent: #feb342;
 
-  --text: #0a0818;
+  --text: #00051d;
 
   --error: #e63946;
   --success: #2a9d8f;
@@ -45,6 +45,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-family: var(--font-grotesk), sans-serif;
 }
