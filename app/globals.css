@@ -10,6 +10,8 @@
 
   --error: #e63946;
   --success: #2a9d8f;
+
+  --mpesa: #39b54a;
 }
 
 html {
@@ -27,6 +29,8 @@ html {
   --color-error: var(--error);
   --color-success: var(--success);
 
+  --color-mpesa: var(--mpesa);
+
   --body-font: var(--font-sora), sans-serif;
   --heading-font: var(--font-grotesk), sans-serif;
 }
@@ -35,6 +39,7 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  outline: none;
 }
 
 body {

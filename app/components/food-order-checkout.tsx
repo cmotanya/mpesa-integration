@@ -1,4 +1,7 @@
+"use client";
+
 import { orderItems } from "@/data/order-items";
+import { cn } from "@/utils/cn";
 import { subtotal } from "@/utils/types";
 import { ClipboardList } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
@@ -9,13 +12,13 @@ export const FoodOrderCheckout = () => {
 
   return (
     <div>
-      <div className="mb-6 space-y-2">
+      <div className="mb-6 space-y-1">
         <Fade duration={150} cascade>
           <h1 className="font-primary text-center text-3xl font-bold uppercase">
             Complete your order
           </h1>
-          <p className="text-text/80 font-medium capitalize">
-            Review your order and pay securely with M-PESA
+          <p className="text-text/80 capitalize">
+            Review your order and pay with M-PESA.
           </p>
         </Fade>
       </div>
@@ -37,33 +40,42 @@ export const FoodOrderCheckout = () => {
             damping={0.5}
             triggerOnce
           >
-            {orderItems.map((item) => (
-              <div
-                key={item.id}
-                className="border-primary/15 flex justify-between border-b py-2"
-              >
-                <div className="block space-x-3">
-                  <span>{item.quantity}</span>
-                  <span>{item.name}</span>
-                </div>
+            {orderItems.map((item) => {
+              const isLastItem = item.id === orderItems.length;
+              const isEvenItem = item.id % 2 === 0;
 
-                <p className="font-medium">
-                  KES {(item.price * item.quantity).toLocaleString()}
-                </p>
-              </div>
-            ))}
+              return (
+                <div
+                  key={item.id}
+                  className={cn(
+                    "border-primary/15 flex justify-between border-b py-2 text-sm",
+                    isLastItem && "border-0",
+                    isEvenItem && "bg-secondary/5",
+                  )}
+                >
+                  <div className="block space-x-3">
+                    <span>{item.quantity}</span>
+                    <span>{item.name}</span>
+                  </div>
+
+                  <p className="font-medium">
+                    KES {(item.price * item.quantity).toLocaleString()}
+                  </p>
+                </div>
+              );
+            })}
 
             <div className="flex justify-between pt-4 font-bold">
               <span className="uppercase">Subtotal:</span>
               <span>KES {subtotal.toLocaleString()}</span>
             </div>
 
-            <div className="flex justify-between py-3">
+            <div className="flex justify-between py-3 text-sm">
               <span>Delivery Fee</span>
               <span>KES {deliveryFee.toLocaleString()}</span>
             </div>
 
-            <div className="flex justify-between py-3 text-xl font-bold">
+            <div className="flex justify-between text-xl font-bold">
               <span className="uppercase">Total</span>
               <span>KES {totalAmount.toLocaleString()}</span>
             </div>

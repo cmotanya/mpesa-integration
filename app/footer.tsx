@@ -6,7 +6,7 @@ export const Footer = () => {
       <p className="flex gap-1">
         <Lock size={14} /> Your payment is secure and encrypted.
       </p>
-      <p>Need help? Contact us at support@food.com</p>
+      <p>Need help? Contact us at oak-kitchen-support@food.com</p>
     </footer>
   );
 };
