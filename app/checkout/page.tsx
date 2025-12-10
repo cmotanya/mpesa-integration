@@ -85,3 +85,5 @@ export const FoodOrderCheckout = () => {
     </div>
   );
 };
+
+export default FoodOrderCheckout;
