@@ -1,13 +1,14 @@
-import { DeliveryInformation } from "./components/delivery-details";
-import { FoodOrderCheckout } from "./components/food-order-checkout";
-import { MPesaPayment } from "./components/mpesa-payment";
+import FoodMenuOrder from "./menu/page";
 
 export default function Home() {
   return (
-    <main className="mb-15 flex min-h-screen flex-col items-center justify-center gap-10 py-10">
-      <FoodOrderCheckout />
+    <main className="relative mb-15 flex min-h-screen flex-col items-center gap-10 py-10">
+      {/* <FoodOrderCheckout />
       <DeliveryInformation />
-      <MPesaPayment />
+      <MPesaPayment /> */}
+
+      <h1 className="text-4xl font-bold">Welcome to the Food Ordering App</h1>
+      <FoodMenuOrder />
     </main>
   );
 }
