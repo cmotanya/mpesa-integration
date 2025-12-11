@@ -11,7 +11,7 @@ export const MPesaPayment = () => {
     <div>
       <Button
         onClick={() => {}}
-        className="hover:bg-mpesa-hover/20 text-mpesa ring-mpesa bg-mpesa/10 py-0.5 font-bold uppercase ring-2 transition-transform duration-200 hover:-translate-y-1 active:scale-95"
+        className="hover:bg-mpesa-hover/20 text-mpesa ring-mpesa bg-mpesa/10 mx-auto py-0.5 font-bold uppercase ring-2 transition-transform duration-200 hover:-translate-y-1 active:scale-95"
       >
         {"Pay with "}
 

@@ -5,13 +5,14 @@ import { cn } from "@/utils/cn";
 import { subtotal } from "@/utils/types";
 import { ClipboardList } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
+import { MPesaPayment } from "../components/MPesaPayment";
 
 export const FoodOrderCheckout = () => {
   const deliveryFee = 150;
   const totalAmount = subtotal + deliveryFee;
 
   return (
-    <div>
+    <div className="m-auto flex min-h-screen w-full flex-col items-center justify-center space-y-8">
       <div className="mb-6 space-y-1">
         <Fade duration={150} cascade>
           <h1 className="font-primary text-center text-3xl font-bold uppercase">
@@ -82,6 +83,8 @@ export const FoodOrderCheckout = () => {
           </Fade>
         </div>
       </div>
+
+      <MPesaPayment />
     </div>
   );
 };

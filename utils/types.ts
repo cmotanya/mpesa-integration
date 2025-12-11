@@ -1,4 +1,8 @@
 import { orderItems } from "@/data/order-items";
+import { CartModal } from "../app/components/CartModal";
+import { MenuItemCard } from "../app/components/MenuItemCard";
+import CategoryTabs from "../app/components/CategoryTabs";
+import CartButton from "../app/components/CartButton";
 
 export type ButtonProps = {
   children: React.ReactNode;
@@ -38,4 +42,28 @@ export type CartItem = MenuItem & {
 export type FetchMenuProps = {
   setMenuCategories: React.Dispatch<React.SetStateAction<Category[]>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type CartModalProps = {
+  showCart: boolean;
+  setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
+  cart: CartItem[];
+};
+
+export type MenuItemCardProps = {
+  selectedCategory: Category | null;
+  cart: CartItem[];
+  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+};
+
+export type CategoryTabsProps = {
+  categories: Category[];
+  selectedCategory: Category | null;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
+};
+
+export type CartButtonProps = {
+  showCart: boolean;
+  setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
+  cart: CartItem[];
 };
