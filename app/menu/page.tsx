@@ -80,7 +80,13 @@ export const FoodMenuOrder = () => {
         setCart={setCart}
       />
 
-      <CartModal showCart={showCart} setShowCart={setShowCart} cart={cart} />
+      <CartModal
+        showCart={showCart}
+        setShowCart={setShowCart}
+        cart={cart}
+        setCart={setCart}
+        onBackToMenu={() => setShowCart(false)}
+      />
     </div>
   );
 };

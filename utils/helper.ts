@@ -1,3 +1,4 @@
+import { CartItem } from "./types";
 // Adds an item to the cart or increments its quantity if it already exists
 export const addToCart = <T extends { id: string; quantity: number }>(
   cartItems: T[],
@@ -56,8 +57,10 @@ export const removeFromCart = <T extends { id: string }>(
 // Clears all items from the cart
 export const clearCart = <T extends { id: string; quantity: number }>(
   setCartItems: React.Dispatch<React.SetStateAction<T[]>>,
+  setShowCart: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   setCartItems([]);
+  setShowCart(false);
 };
 
 // Calculates total price of items in the cart
@@ -74,12 +77,9 @@ export const calculateTotal = <T extends { price: number; quantity: number }>(
 export const calculateSubtotal = <
   T extends { price: number; quantity: number },
 >(
-  cartItems: T[],
+  cart: T[],
 ): number => {
-  return cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
+  return cart.reduce((sum, item) => sum + item.price, 0);
 };
 
 // Calculates grand total by adding subtotal and delivery fee
@@ -123,4 +123,16 @@ export const formatDateTime = (date: Date): string => {
 
 export const formatPhoneNumber = (phoneNumber: string): string => {
   return phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+};
+
+export const subTotal = (cartItems: CartItem[]): number => {
+  return calculateSubtotal(cartItems);
+};
+
+export const grandTotal = (
+  cartItems: CartItem[],
+  deliveryFee: number,
+): number => {
+  const subtotal = calculateSubtotal(cartItems);
+  return calculateGrandTotal(subtotal, deliveryFee);
 };
