@@ -1,82 +1,19 @@
-"use client";
+import FoodMenuOrder from "@/components/FoodMenuOrder";
+import { Suspense } from "react";
 
-import { useState } from "react";
-import { CartModal } from "../../components/CartModal";
-import { MenuItemCard } from "../../components/MenuItemCard";
-import CategoryTabs from "../../components/CategoryTabs";
-import CartButton from "../../components/CartButton";
-import { useCart } from "@/contexts/CartContext";
-
-import { useCategoryTabs } from "@/hooks/useCategoryTabs";
-import { Category } from "@/utils/types";
-import { useMenu } from "@/hooks/useMenu";
-import { useSearchParams } from "next/navigation";
-import { Fade } from "react-awesome-reveal";
-
-export const FoodMenuOrder = () => {
-  const searchParams = useSearchParams();
-
-  const [showCart, setShowCart] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null,
-  );
-
-  const { cart } = useCart();
-
-  useMenu({
-    searchParams,
-    setCategories,
-    setSelectedCategory,
-    menuId: "menu",
-  });
-
-  useCategoryTabs({
-    selectedCategory,
-    searchParams,
-    menuId: "menu",
-  });
-
+const MenuPage = () => {
   return (
-    <section
-      id="menu"
-      className="relative container flex flex-col items-center justify-center space-y-6"
-    >
-      <div className="bg-accent/20 sticky top-0 z-40 mb-6 w-full backdrop-blur-md">
-        <div className="border-primary/40 mt-8 h-fit space-y-5 rounded-lg border-b-2 p-2 px-3 shadow-lg">
-          <div className="flex items-center justify-between">
-            <Fade duration={150} direction="left" cascade triggerOnce>
-              <h2 className="text-2xl font-bold">Select Categories:</h2>
-            </Fade>
-
-            <CartButton setShowCart={setShowCart} cart={cart} />
-          </div>
-
-          <CategoryTabs
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center gap-4">
+          <span className="border-secondary size-12 animate-spin rounded-full border-4 border-t-transparent" />
+          <p className="text-text/80 font-bold uppercase">Loading menu...</p>
         </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl">
-        {selectedCategory && (
-          <div className="mb-4 flex items-center justify-between gap-2 font-bold">
-            <p className="uppercase">{selectedCategory.name}: </p>
-
-            <p className="text-secondary">
-              {selectedCategory.menu_items?.length} items available
-            </p>
-          </div>
-        )}
-
-        <MenuItemCard selectedCategory={selectedCategory} />
-
-        <CartModal showCart={showCart} setShowCart={setShowCart} />
-      </div>
-    </section>
+      }
+    >
+      <FoodMenuOrder />
+    </Suspense>
   );
 };
 
-export default FoodMenuOrder;
+export default MenuPage;
