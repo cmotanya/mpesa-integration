@@ -70,7 +70,6 @@ export type UseCategoryTabsProps = {
 };
 
 export type UseMenuProps = {
-  setIsLoading: React.Dispatch<SetStateAction<boolean>>;
   setCategories: React.Dispatch<SetStateAction<Category[]>>;
   setSelectedCategory: React.Dispatch<SetStateAction<Category | null>>;
   menuId?: string;

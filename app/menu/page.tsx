@@ -21,13 +21,11 @@ export const FoodMenuOrder = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null,
   );
-  const [isLoading, setIsLoading] = useState(true);
 
   const { cart } = useCart();
 
   useMenu({
     searchParams,
-    setIsLoading,
     setCategories,
     setSelectedCategory,
     menuId: "menu",
@@ -38,15 +36,6 @@ export const FoodMenuOrder = () => {
     searchParams,
     menuId: "menu",
   });
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center gap-4">
-        <span className="border-secondary size-12 animate-spin rounded-full border-4 border-t-transparent" />
-        <p className="text-text/80 font-bold uppercase">Loading menu...</p>
-      </div>
-    );
-  }
 
   return (
     <section

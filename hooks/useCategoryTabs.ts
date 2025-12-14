@@ -29,9 +29,10 @@ export const useCategoryTabs = ({
     const currentCategory = searchParams.get("category");
 
     if (currentCategory !== selectedCategory.slug) {
-      const params = new URLSearchParams();
+      const params = new URLSearchParams(searchParams.toString());
 
       params.set("category", selectedCategory.slug);
+      params.delete("item");
       router.replace(pathname + "?" + params.toString(), { scroll: false });
     }
 

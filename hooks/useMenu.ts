@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 export const useMenu = ({
   searchParams,
-  setIsLoading,
   setCategories,
   setSelectedCategory,
   setSelectedItem,
@@ -15,12 +14,9 @@ export const useMenu = ({
 }: UseMenuProps) => {
   useEffect(() => {
     const loadMenu = async () => {
-      setIsLoading(true);
-
       const data = await fetchMenu();
 
       if (!data || data.length === 0) {
-        setIsLoading(false);
         return;
       }
 
@@ -46,8 +42,6 @@ export const useMenu = ({
         const item = initialCategory.items.find((i) => i.id === itemId);
         setSelectedItem(item?.id || null);
       }
-
-      setIsLoading(false);
 
       if (menuId) {
         const targetElement = document.getElementById(menuId);
