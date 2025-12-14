@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
-import { Category } from "@/utils/types";
+import { DbCategory } from "@/utils/types";
 
-const fetchMenu = async (): Promise<Category[]> => {
+const fetchMenu = async (): Promise<DbCategory[]> => {
   try {
     const { data, error } = await supabase
       .from("categories")
@@ -28,10 +28,9 @@ const fetchMenu = async (): Promise<Category[]> => {
     const filteredData =
       data?.map((category) => ({
         ...category,
-        menu_items: category.menu_items?.filter(
-          (item) => item.is_available || [],
-        ),
-      })) || [];
+        menu_items:
+          category.menu_items?.filter((item) => item.is_available) ?? [],
+      })) ?? [];
 
     return filteredData;
   } catch (error) {

@@ -14,6 +14,8 @@ export type MenuItem = {
   name: string;
   description: string;
   price: number;
+  imageUrl?: string;
+  is_available: boolean;
 };
 
 export type Category = {
@@ -23,6 +25,10 @@ export type Category = {
   menu_items?: MenuItem[];
   items?: MenuItem[];
   slug: string;
+};
+
+export type DbCategory = Omit<Category, "slug"> & {
+  menu_items: Omit<MenuItem, "is_available">[];
 };
 
 export type CartItem = MenuItem & {
