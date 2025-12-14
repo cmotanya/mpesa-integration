@@ -24,10 +24,10 @@ export const useMenu = ({
         return;
       }
 
-      const dataWithSlug: Category[] = data.map((category) => ({
+      const dataWithSlug = data.map((category) => ({
         ...category,
         slug: slugify(category.name),
-      }));
+      })) as Category[];
 
       setCategories(dataWithSlug);
 
