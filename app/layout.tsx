@@ -3,6 +3,7 @@ import { grotesk, sora } from "@/utils/font";
 import { siteMetaData } from "@/data/metadata";
 import { AppToast } from "@/utils/toast";
 import { Footer } from "./footer";
+import { CartProvider } from "@/contexts/CartContext";
 
 export const metadata = siteMetaData;
 
@@ -14,11 +15,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${grotesk.variable} ${sora.variable} relative min-h-screen antialiased`}
+        className={`${grotesk.variable} ${sora.variable} flex min-h-screen flex-col antialiased`}
       >
-        <AppToast />
-        {children}
-        <Footer />
+        <CartProvider>
+          <AppToast />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

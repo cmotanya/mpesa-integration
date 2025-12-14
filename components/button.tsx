@@ -32,14 +32,19 @@ export const Button = ({
 
   if (href) {
     return (
-      <Link href={href} className={cn(baseStyle, className)} {...props}>
+      <Link href={href} className={cn(baseStyle, className)}>
         {buttonContent}
       </Link>
     );
   }
 
   return (
-    <button onClick={onClick} className={cn(baseStyle, className)} {...props}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(baseStyle, className)}
+      {...props}
+    >
       {buttonContent}
     </button>
   );

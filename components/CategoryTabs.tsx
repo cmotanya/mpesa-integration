@@ -1,6 +1,7 @@
+import { setCategoryTabsStorage } from "@/contexts/cart.storage";
 import { cn } from "@/utils/cn";
 import { CategoryTabsProps } from "@/utils/types";
-import React from "react";
+import { Fade } from "react-awesome-reveal";
 
 const CategoryTabs = ({
   categories,
@@ -12,11 +13,10 @@ const CategoryTabs = ({
       {categories.map((category) => (
         <button
           key={category.id}
-          onClick={() =>
-            setSelectedCategory(
-              category.id === selectedCategory?.id ? null : category,
-            )
-          }
+          onClick={() => {
+            setSelectedCategory(category);
+            setCategoryTabsStorage(category.id.toString());
+          }}
           className={cn(
             "w-auto cursor-pointer rounded-md px-3 py-1 text-left font-medium transition-colors duration-200",
             selectedCategory?.id === category.id

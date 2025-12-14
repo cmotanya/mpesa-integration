@@ -1,13 +1,17 @@
 "use client";
 
-import { CartItem } from "@/utils/types";
 import { ArrowLeft, ClipboardList } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
-import { MPesaPayment } from "../components/MPesaPayment";
-import { Button } from "../components/button";
-import { grandTotal, subTotal } from "@/utils/helper";
+import { MPesaPayment } from "../../components/MPesaPayment";
+import { Button } from "../../components/button";
+import { total, subTotal } from "@/utils/helper";
+import { useCart } from "@/contexts/CartContext";
+import { useRouter } from "next/navigation";
 
-export const FoodOrderCheckout = ({ cart = [] }: { cart?: CartItem[] }) => {
+export const FoodOrderCheckout = () => {
+  const router = useRouter();
+
+  const { cart } = useCart();
   const deliveryFee = 150;
 
   return (
@@ -52,7 +56,7 @@ export const FoodOrderCheckout = ({ cart = [] }: { cart?: CartItem[] }) => {
 
             <div className="flex justify-between text-xl font-bold">
               <span className="uppercase">Total</span>
-              <span>KES {grandTotal(cart, deliveryFee).toLocaleString()}</span>
+              <span>KES {total(cart, deliveryFee).toLocaleString()}</span>
             </div>
           </Fade>
         </div>
@@ -60,7 +64,7 @@ export const FoodOrderCheckout = ({ cart = [] }: { cart?: CartItem[] }) => {
 
       <div className="flex w-auto flex-col items-center gap-4">
         <Button
-          href="/menu"
+          onClick={() => router.back()}
           className="flex w-full items-center justify-center md:w-auto"
         >
           <ArrowLeft /> Back to Menu

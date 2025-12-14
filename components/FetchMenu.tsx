@@ -25,7 +25,15 @@ const fetchMenu = async (): Promise<Category[]> => {
 
     if (error) throw error;
 
-    return data || [];
+    const filteredData =
+      data?.map((category) => ({
+        ...category,
+        menu_items: category.menu_items?.filter(
+          (item) => item.is_available || [],
+        ),
+      })) || [];
+
+    return filteredData;
   } catch (error) {
     console.error("Error fetching menu:", error);
     return [];
