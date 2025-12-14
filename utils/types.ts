@@ -14,8 +14,6 @@ export type MenuItem = {
   name: string;
   description: string;
   price: number;
-  image_url?: string;
-  image?: string;
 };
 
 export type Category = {

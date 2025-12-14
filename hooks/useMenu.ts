@@ -24,7 +24,7 @@ export const useMenu = ({
         return;
       }
 
-      const dataWithSlug = data.map((category) => ({
+      const dataWithSlug: Category[] = data.map((category) => ({
         ...category,
         slug: slugify(category.name),
       }));
