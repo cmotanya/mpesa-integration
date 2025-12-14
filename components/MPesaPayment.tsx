@@ -15,7 +15,10 @@ export const MPesaPayment = () => {
     clearCartFromStorage();
     clearFromCart();
 
-    toast.success("Payment successful! Thank you for your order.");
+    toast.success("Payment successful! Thank you for your order.", {
+      duration: 2000,
+      position: "top-center",
+    });
 
     route.push("/menu");
   };
