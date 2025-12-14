@@ -28,7 +28,7 @@ export const FoodOrderCheckout = () => {
       </div>
 
       <div className="border-secondary/30 h-fit overflow-hidden rounded-lg border-2 p-2 shadow-lg">
-        <Fade direction="down" duration={150} damping={0.5} triggerOnce>
+        <Fade direction="down" duration={100} damping={0.5} triggerOnce>
           <p className="mb-4 flex items-center justify-center gap-2 text-2xl font-bold uppercase">
             <ClipboardList size={30} />
             Order Summary
@@ -38,7 +38,7 @@ export const FoodOrderCheckout = () => {
         <div>
           <Fade
             cascade
-            duration={150}
+            duration={100}
             delay={200}
             direction="up"
             damping={0.5}
