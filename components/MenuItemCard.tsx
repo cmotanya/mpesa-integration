@@ -40,7 +40,7 @@ export const MenuItemCard = ({ selectedCategory }: MenuItemCardProps) => {
                       onClick={() => {
                         setActiveId(item.id);
                         addToCartItem({ ...item, quantity: 1 });
-                        setTimeout(() => setActiveId(null), 2500);
+                        setTimeout(() => setActiveId(null), 2000);
                       }}
                       className="ring-primary bg-primary flex min-w-30 cursor-pointer items-center gap-1 rounded-md px-1 py-2 text-xs font-medium text-white ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
                     >

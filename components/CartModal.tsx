@@ -6,7 +6,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useEffect } from "react";
 
 export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
-  const { cart, clearFromCart } = useCart();
+  const { cart, clearFromCart, removeFromCartItem } = useCart();
 
   useEffect(() => {
     if (showCart) {
@@ -76,11 +76,21 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
                       key={item.id}
                       className="border-b-secondary/30 flex items-center justify-between border-b py-2"
                     >
-                      <div>
-                        <p className="text-sm">{item.name}</p>
-                        <p className="text-xs font-medium">
-                          Quantity: {item.quantity}
-                        </p>
+                      <div className="flex flex-row items-center justify-center gap-2">
+                        <button
+                          className="text-error/80 hover:text-error transition-colors duration-150 active:scale-95"
+                          aria-label={`Remove ${item.name} from cart`}
+                          onClick={() => removeFromCartItem(item.id)}
+                        >
+                          <X className="text-error size-5" />
+                        </button>
+
+                        <div>
+                          <p className="text-sm font-bold">{item.name}</p>
+                          <p className="text-xs font-medium">
+                            Quantity: {item.quantity}
+                          </p>
+                        </div>
                       </div>
                       <div>
                         <p className="text-sm font-bold">
