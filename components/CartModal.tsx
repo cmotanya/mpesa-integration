@@ -65,7 +65,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
             <>
               <div className="relative mt-4 max-h-96 space-y-4 overflow-y-auto">
                 <Fade
-                  direction="up"
+                  direction="down"
                   cascade
                   duration={150}
                   delay={100}
