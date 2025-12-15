@@ -4,6 +4,7 @@ import { siteMetaData } from "@/data/metadata";
 import { AppToast } from "@/utils/toast";
 import { Footer } from "./footer";
 import { CartProvider } from "@/contexts/CartContext";
+import Header from "./header/page";
 
 export const metadata = siteMetaData;
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <AppToast />
+          <Header />
           <main className="flex-1">{children}</main>
           <Footer />
         </CartProvider>
