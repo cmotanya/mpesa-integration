@@ -137,8 +137,8 @@ const DeliveryAddressPage = () => {
           </Fade>
         </div>
 
-        <div className="mt-8 flex flex-col items-center gap-4 px-8 md:flex-row">
-          <Fade duration={100} delay={500} direction="up">
+        <Fade duration={100} delay={600} direction="up">
+          <div className="mt-8 flex w-full flex-col items-center gap-4 px-8 md:flex-row">
             <Button
               href="/menu"
               className="group bg-secondary/10 ring-secondary/50 text-text flex w-full items-center justify-center font-medium uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
@@ -146,9 +146,7 @@ const DeliveryAddressPage = () => {
               <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />{" "}
               Back to Menu
             </Button>
-          </Fade>
 
-          <Fade duration={100} delay={600} direction="up">
             <Button
               href="/checkout"
               className="group flex w-full items-center justify-center uppercase transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
@@ -156,8 +154,8 @@ const DeliveryAddressPage = () => {
               Save & Continue{" "}
               <ArrowRight className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />
             </Button>
-          </Fade>
-        </div>
+          </div>
+        </Fade>
       </div>
     </div>
   );
