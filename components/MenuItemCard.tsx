@@ -4,6 +4,7 @@ import { Fade } from "react-awesome-reveal";
 import { useState } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import { Check, Plus } from "lucide-react";
+import { cn } from "@/utils/cn";
 
 export const MenuItemCard = ({ selectedCategory }: MenuItemCardProps) => {
   const { addToCartItem } = useCart();
@@ -15,7 +16,7 @@ export const MenuItemCard = ({ selectedCategory }: MenuItemCardProps) => {
   const SKELETON_COUNT = 6;
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-2 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
       {hasItems ? (
         <>
           {menuItems.map((item) => {
@@ -25,7 +26,7 @@ export const MenuItemCard = ({ selectedCategory }: MenuItemCardProps) => {
               <Fade key={item.id} duration={150} direction="up" triggerOnce>
                 <div
                   key={item.id}
-                  className={`shadow-secondary/50 group bg-secondary/10 hover:bg-secondary/20 mb-4 rounded-lg p-4 pb-2 shadow-sm transition-all duration-200 ease-in-out ${
+                  className={`shadow-secondary/50 group bg-secondary/10 hover:bg-secondary/20 border-secondary/50 mb-4 rounded-lg border p-3 shadow-sm transition-all duration-200 ease-in-out ${
                     activeId === item.id ? "ring-secondary/60 ring" : ""
                   }`}
                 >
@@ -42,18 +43,21 @@ export const MenuItemCard = ({ selectedCategory }: MenuItemCardProps) => {
                         addToCartItem({ ...item, quantity: 1 });
                         setTimeout(() => setActiveId(null), 2000);
                       }}
-                      className="ring-primary bg-primary flex min-w-30 cursor-pointer items-center gap-1 rounded-md px-1 py-2 text-xs font-medium text-white ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+                      className={cn(
+                        "bg-primary flex min-w-30 cursor-pointer items-center justify-center gap-1 rounded-md py-2 text-xs text-white transition-all duration-200 ease-in-out hover:scale-105 active:scale-95",
+                        isActive && "bg-primary/50 pointer-events-none",
+                      )}
                     >
                       {isActive ? (
-                        <>
+                        <span className="flex items-center gap-1">
                           <Check className="size-5" />
                           Added to Cart
-                        </>
+                        </span>
                       ) : (
-                        <>
+                        <span className="flex items-center gap-1">
                           <Plus className="size-5" />
                           Add to Cart
-                        </>
+                        </span>
                       )}
                     </button>
                   </div>

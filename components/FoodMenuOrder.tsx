@@ -40,7 +40,7 @@ export const FoodMenuOrder = () => {
   return (
     <section
       id="menu"
-      className="relative container flex flex-col items-center justify-center space-y-6"
+      className="relative flex flex-col items-center justify-center"
     >
       <div className="bg-accent/20 sticky top-0 z-40 mb-6 w-full backdrop-blur-md">
         <div className="border-primary/40 mt-8 h-fit space-y-5 rounded-lg border-b-2 p-2 px-3 shadow-lg">
@@ -60,9 +60,9 @@ export const FoodMenuOrder = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl">
+      <div className="">
         {selectedCategory && (
-          <div className="mb-4 flex items-center justify-between gap-2 font-bold">
+          <div className="mb-4 flex items-center justify-between gap-2 font-bold md:justify-normal">
             <p className="uppercase">{selectedCategory.name}: </p>
 
             <p className="text-secondary">

@@ -4,6 +4,7 @@ import { Button } from "./button";
 import { Fade } from "react-awesome-reveal";
 import { useCart } from "@/contexts/CartContext";
 import { useEffect } from "react";
+import { cn } from "@/utils/cn";
 
 export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
   const { cart, clearFromCart, removeFromCartItem } = useCart();
@@ -25,9 +26,9 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
   return (
     <>
       <div className="fixed inset-0 top-0 right-0 bottom-0 left-0 z-50 flex w-full items-center justify-center overflow-auto bg-black/50 backdrop-blur-sm">
-        <div className="bg-background/90 w-11/12 max-w-md overflow-hidden rounded-lg p-6 shadow-lg">
-          <div className="flex items-center justify-between">
-            <h2 className="text-primary/70 flex items-center justify-center gap-2 text-2xl font-bold uppercase">
+        <div className="bg-background w-11/12 max-w-md overflow-hidden rounded-lg py-4 shadow-lg">
+          <div className="flex items-center justify-between px-4">
+            <h2 className="text-primary flex items-center justify-center gap-2 text-2xl font-bold uppercase">
               Cart <ShoppingBag className="inline-block size-6" />
             </h2>
 
@@ -63,58 +64,71 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
             </Fade>
           ) : (
             <>
-              <div className="relative mt-4 max-h-96 space-y-4 overflow-y-auto">
-                <Fade
-                  direction="down"
-                  cascade
-                  duration={150}
-                  delay={100}
-                  triggerOnce
-                >
-                  {cart.map((item) => (
-                    <div
-                      key={item.id}
-                      className="border-b-secondary/30 flex items-center justify-between border-b py-2"
-                    >
-                      <div className="flex flex-row items-center justify-center gap-2">
-                        <button
-                          className="text-error/80 hover:text-error transition-colors duration-150 active:scale-95"
-                          aria-label={`Remove ${item.name} from cart`}
-                          onClick={() => removeFromCartItem(item.id)}
-                        >
-                          <X className="text-error size-5" />
-                        </button>
+              <div className="relative mt-4 max-h-96 overflow-y-auto">
+                <Fade direction="down" duration={150} delay={100} triggerOnce>
+                  {cart.map((item) => {
+                    const isEven = cart.indexOf(item) % 2 === 0;
 
-                        <div>
-                          <p className="text-sm font-bold">{item.name}</p>
-                          <p className="text-xs font-medium">
-                            Quantity: {item.quantity}
-                          </p>
-                        </div>
+                    return (
+                      <div
+                        key={item.id}
+                        className={cn(
+                          "border-b-accent/30 flex items-center justify-between px-2 py-4",
+                          isEven &&
+                            "bg-secondary/20 shadow-secondary/30 shadow-md",
+                        )}
+                      >
+                        <Fade
+                          direction="up"
+                          duration={150}
+                          delay={150}
+                          triggerOnce
+                        >
+                          <div className="flex flex-row items-center justify-center gap-2">
+                            <button
+                              className="text-error/80 hover:text-error cursor-pointer transition-colors duration-150 active:scale-95"
+                              aria-label={`Remove ${item.name} from cart`}
+                              onClick={() => removeFromCartItem(item.id)}
+                            >
+                              <X className="text-error size-5" />
+                            </button>
+
+                            <div>
+                              <p className="text-sm font-medium uppercase">
+                                {item.name}
+                              </p>
+                              <p className="text-xs font-medium">
+                                Quantity: {item.quantity}
+                              </p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium">
+                              Total: KES{" "}
+                              {(item.price * item.quantity).toLocaleString()}
+                            </p>
+                          </div>
+                        </Fade>
                       </div>
-                      <div>
-                        <p className="text-sm font-bold">
-                          Total: KES{" "}
-                          {(item.price * item.quantity).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </Fade>
               </div>
 
-              <div className="flex items-center justify-between">
-                <Fade direction="up" duration={150} delay={200} triggerOnce>
+              <div className="border-t-accent/80 flex items-center justify-between border-t-2 px-2">
+                <Fade direction="left" duration={150} delay={200} triggerOnce>
                   <Button
                     onClick={() => clearFromCart()}
-                    className="bg-error mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium uppercase"
+                    className="bg-error mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium"
                   >
                     Clear
                   </Button>
+                </Fade>
 
+                <Fade direction="right" duration={150} delay={200} triggerOnce>
                   <Button
-                    href="/checkout"
-                    className="ase mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium uppercase"
+                    href="/checkout/delivery-address"
+                    className="ase mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium"
                   >
                     Proceed to Checkout
                   </Button>

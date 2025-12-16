@@ -19,10 +19,10 @@ const CategoryTabs = ({
               setCategoryTabsStorage(category.id.toString());
             }}
             className={cn(
-              "w-auto cursor-pointer rounded-md px-3 py-1 text-left font-medium transition-colors duration-200",
+              "w-auto cursor-pointer rounded-md border px-3 py-1 text-left font-medium transition-all duration-200 ease-in-out",
               selectedCategory?.id === category.id
-                ? "bg-accent/30"
-                : "bg-secondary/50 hover:bg-secondary/70",
+                ? "bg-accent/50 border-accent/80 scale-105"
+                : "bg-secondary/50 border-secondary/80 hover:bg-accent/30 hover:border-accent/50",
             )}
           >
             {category.name}
@@ -35,7 +35,7 @@ const CategoryTabs = ({
           />
         ));
 
-  return <div className="mb-4 flex flex-wrap gap-2">{content}</div>;
+  return <div className="mb-4 flex flex-wrap gap-3">{content}</div>;
 };
 
 export default CategoryTabs;
