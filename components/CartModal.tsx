@@ -1,13 +1,14 @@
-import { CartModalProps } from "@/utils/types";
+import { CartItem, CartModalProps } from "@/utils/types";
 import { ArrowLeft, ShoppingBag, X } from "lucide-react";
 import { Button } from "./button";
 import { Fade } from "react-awesome-reveal";
 import { useCart } from "@/contexts/CartContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
 
 export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
   const { cart, clearFromCart, removeFromCartItem } = useCart();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (showCart) {
@@ -22,6 +23,14 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
   }, [showCart]);
 
   if (!showCart) return null;
+
+  const handleClickDelete = (item: CartItem) => {
+    setIsDeleting(true);
+
+    setTimeout(() => {
+      removeFromCartItem(item.id);
+    }, 300);
+  };
 
   return (
     <>
@@ -74,8 +83,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
                         key={item.id}
                         className={cn(
                           "border-b-accent/30 flex items-center justify-between px-2 py-4",
-                          isEven &&
-                            "bg-secondary/20 shadow-secondary/30 shadow-md",
+                          isEven && "bg-secondary/10 shadow-secondary/10",
                         )}
                       >
                         <Fade
@@ -88,7 +96,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
                             <button
                               className="text-error/80 hover:text-error cursor-pointer transition-colors duration-150 active:scale-95"
                               aria-label={`Remove ${item.name} from cart`}
-                              onClick={() => removeFromCartItem(item.id)}
+                              onClick={() => handleClickDelete(item)}
                             >
                               <X className="text-error size-5" />
                             </button>

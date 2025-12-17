@@ -6,4 +6,6 @@ export type CartActions =
   | { type: "REMOVE_ITEM"; payload: { itemId: string } }
   | { type: "CLEAR_CART" };
 
-export type CartState = { cart: CartItem[] };
+export type CartState = {
+  cart: CartItem[];
+};

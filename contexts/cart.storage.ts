@@ -58,9 +58,3 @@ export const setCategoryTabsStorage = (categoryId: string) => {
     console.error("Error saving category to localStorage:", error);
   }
 };
-
-
-
-
-
-

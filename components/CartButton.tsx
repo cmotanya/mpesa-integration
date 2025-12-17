@@ -9,16 +9,15 @@ const CartButton = ({ setShowCart, cart }: CartButtonProps) => {
       <button
         onClick={() => setShowCart((prev) => !prev)}
         className={cn(
-          "bg-primary relative z-50 flex cursor-pointer items-center justify-center rounded-full p-2 shadow-lg backdrop-blur-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95",
+          "bg-primary z-50 flex cursor-pointer items-center justify-center rounded-full p-2 shadow-lg backdrop-blur-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95",
           cart.length === 0 && "bg-primary/50 pointer-events-none",
-
         )}
       >
         <ShoppingCart className="text-white" />
         {cart.length > 0 && (
-          <span className="absolute -top-3 -right-2.5 flex size-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+          <div className="absolute -top-3 -right-2.5 flex size-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
             {cart.reduce((total, item) => total + item.quantity, 0)}
-          </span>
+          </div>
         )}
       </button>
     </Fade>

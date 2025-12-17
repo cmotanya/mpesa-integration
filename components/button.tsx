@@ -9,6 +9,7 @@ export const Button = ({
   icon,
   iconPosition,
   href,
+  buttonType,
   ...props
 }: ButtonProps) => {
   const baseStyle =
@@ -40,7 +41,7 @@ export const Button = ({
 
   return (
     <button
-      type="button"
+      type={buttonType}
       onClick={onClick}
       className={cn(baseStyle, className)}
       {...props}

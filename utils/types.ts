@@ -1,5 +1,7 @@
 import type { SetStateAction, ReactNode } from "react";
 import { UseFormReturn } from "react-hook-form";
+import { DeliveryAddressData } from "./zod-schema";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export type ButtonProps = {
   children: ReactNode;
@@ -8,6 +10,7 @@ export type ButtonProps = {
   icon?: ReactNode;
   href?: string;
   iconPosition?: "left" | "right";
+  buttonType?: "button" | "submit" | "reset";
 };
 
 export type MenuItem = {
@@ -82,4 +85,31 @@ export type UseMenuProps = {
 export type CartButtonProps = {
   setShowCart: React.Dispatch<SetStateAction<boolean>>;
   cart: CartItem[];
+};
+
+export type DeliveryAddressType = UseFormReturn<DeliveryAddressData>;
+
+export type DeliveryAddressProps = {
+  form: DeliveryAddressType;
+  formState: DeliveryAddressType["formState"];
+  isVerifying: boolean;
+};
+
+export type OnSubmitProps = {
+  data: DeliveryAddressData;
+  setIsVerifying: React.Dispatch<SetStateAction<boolean>>;
+  form: DeliveryAddressType;
+  router: AppRouterInstance;
+};
+
+export type DeliveryDataType = {
+  streetAddress: string;
+  areaNeighborhood: string;
+  phoneNumber: string;
+};
+
+export type HandleLocationProps = {
+  setIsGettingLocation: React.Dispatch<SetStateAction<boolean>>;
+  setLocationError: React.Dispatch<SetStateAction<string | null>>;
+  form: DeliveryAddressType;
 };
