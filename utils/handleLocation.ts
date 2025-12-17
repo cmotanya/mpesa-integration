@@ -30,7 +30,6 @@ export const handleLocationClick = async ({
     // Get address from coordinates
     const addressData = await reverseGeocode(latitude, longitude);
 
-    // Update form with the address
     form.setValue("streetAddress", addressData.streetAddress, {
       shouldValidate: true,
       shouldDirty: true,

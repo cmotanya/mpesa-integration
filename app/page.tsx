@@ -50,7 +50,7 @@ const FoodLandingPage = () => {
           >
             <Button
               href="/menu"
-              className="flex w-fit items-center justify-center uppercase"
+              className="bg-primary flex w-auto items-center justify-center uppercase transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
             >
               <ShoppingBagIcon />
               Order Now
@@ -66,7 +66,7 @@ const FoodLandingPage = () => {
           >
             <Button
               href=""
-              className="bg-accent/10 border-accent/50 flex w-fit items-center justify-center border font-medium text-white uppercase backdrop-blur-md"
+              className="bg-accent/10 border-accent/50 flex w-auto items-center justify-center border font-medium text-white uppercase backdrop-blur-md transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
             >
               <Info />
               Learn More

@@ -1,5 +1,5 @@
 import type { SetStateAction, ReactNode } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { Control, FieldPath, UseFormReturn } from "react-hook-form";
 import { DeliveryAddressData } from "./zod-schema";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
@@ -112,4 +112,12 @@ export type HandleLocationProps = {
   setIsGettingLocation: React.Dispatch<SetStateAction<boolean>>;
   setLocationError: React.Dispatch<SetStateAction<string | null>>;
   form: DeliveryAddressType;
+};
+
+export type FormInputProps = {
+  control: Control<DeliveryAddressData>;
+  name: FieldPath<DeliveryAddressData>;
+  label: string;
+  type: string;
+  Icon: React.ElementType;
 };

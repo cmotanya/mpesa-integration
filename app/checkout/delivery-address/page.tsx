@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/button";
-import ContactAddress from "@/components/contact-address";
+import ContactAddress from "@/components/ContactAddress";
 import handleSubmit from "@/hooks/onSubmit";
 import { cn } from "@/utils/cn";
 import { handleLocationClick } from "@/utils/handleLocation";
