@@ -121,3 +121,10 @@ export type FormInputProps = {
   type: string;
   Icon: React.ElementType;
 };
+
+export type CustomLinkProps = {
+  href: string;
+  children: ReactNode;
+  Icon?: React.ElementType;
+  className?: string;
+};
