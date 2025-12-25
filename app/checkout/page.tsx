@@ -26,14 +26,14 @@ export const FoodOrderCheckout = () => {
       <OrderSummary />
 
       <div className="mt-8 flex w-full flex-col items-center justify-between gap-4 px-4 md:flex-row">
+        <MPesaPayment />
+
         <Button
           onClick={() => router.back()}
           className="flex w-full justify-center uppercase md:w-auto"
         >
           <ArrowLeft /> Edit Address
         </Button>
-
-        <MPesaPayment />
       </div>
     </div>
   );

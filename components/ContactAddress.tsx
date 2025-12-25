@@ -55,14 +55,6 @@ const ContactAddress = ({
 
       <div className="mt-8 flex w-full flex-col items-center gap-4 px-8 md:flex-row">
         <Button
-          onClick={() => router.back()}
-          className="group bg-secondary/10 ring-secondary/50 text-text flex w-full items-center justify-center font-medium uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
-        >
-          <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />{" "}
-          Back to Menu
-        </Button>
-
-        <Button
           buttonType="submit"
           className={cn(
             "group flex w-full items-center justify-center uppercase transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto",
@@ -79,6 +71,14 @@ const ContactAddress = ({
               <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1 group-active:translate-x-1" />
             </>
           )}
+        </Button>
+
+        <Button
+          onClick={() => router.back()}
+          className="group bg-secondary/10 ring-secondary/50 text-text flex w-full items-center justify-center font-medium uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
+        >
+          <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />{" "}
+          Back to Menu
         </Button>
       </div>
     </div>
