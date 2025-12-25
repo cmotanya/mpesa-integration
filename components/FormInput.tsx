@@ -1,42 +1,72 @@
 import { cn } from "@/utils/cn";
 import { FormInputProps } from "@/utils/types";
-import React from "react";
+import { Fade } from "react-awesome-reveal";
 import { Controller } from "react-hook-form";
 
-const FormInput = ({ control, name, label, type, Icon }: FormInputProps) => (
+const FormInput = ({
+  control,
+  name,
+  label,
+  type,
+  placeholder,
+  Icon,
+}: FormInputProps) => (
   <Controller
     control={control}
     name={name}
     render={({ field, fieldState }) => (
       <div>
-        <label htmlFor={name} className="text-text text-sm font-medium">
+        <label
+          htmlFor={name}
+          className="text-text/80 block text-sm font-medium"
+        >
           {label}
         </label>
+
         <div className="group relative">
-          <div className="border-r-accent/50 absolute inset-y-0 left-10 flex items-center border-r-2"></div>
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <Icon className="group-focus-within:text-accent text-accent transition-all duration-200 ease-in-out group-focus-within:animate-pulse" />
-          </div>
+          {Icon && (
+            <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+              <Icon
+                className={cn(
+                  "group-focus-within:text-accent text-accent transition-all duration-200 ease-in-out group-focus-within:animate-pulse",
+                  fieldState.error && "text-error",
+                )}
+              />
+            </div>
+          )}
+
           <input
             type={type}
             {...field}
             id={name}
-            placeholder="Street Address"
-            autoComplete="street-address"
+            placeholder={placeholder}
+            autoComplete={name}
             aria-invalid={!!fieldState.error}
             aria-describedby={`${name}-error`}
             className={cn(
-              "ring-accent/50 bg-accent/10 focus:ring-accent/80 shadow-accent/30 w-full rounded-full py-3 ps-12 shadow-md ring transition-all duration-200 ease-in-out focus:ring focus:outline-none",
+              "ring-accent/30 focus:ring-accent/80 shadow-accent/5 block w-full rounded-lg py-3 ps-12 shadow-md ring transition-all duration-200 ease-in-out focus:ring focus:outline-none",
               fieldState.error && "ring-error",
             )}
           />
         </div>
 
-        {fieldState.error && (
-          <span id={`${name}-error`} className="text-error text-sm font-medium">
-            {fieldState.error.message}
-          </span>
-        )}
+        <Fade direction="up" duration={100} damping={0.5} triggerOnce>
+          {fieldState.error && (
+            <span
+              id={`${name}-error`}
+              className="text-error flex items-center gap-1 text-sm font-medium"
+            >
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {fieldState.error.message}
+            </span>
+          )}
+        </Fade>
       </div>
     )}
   />

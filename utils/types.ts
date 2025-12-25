@@ -118,6 +118,7 @@ export type FormInputProps = {
   control: Control<DeliveryAddressData>;
   name: FieldPath<DeliveryAddressData>;
   label: string;
+  placeholder: string;
   type: string;
   Icon: React.ElementType;
 };

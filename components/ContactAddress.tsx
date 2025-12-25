@@ -15,12 +15,20 @@ const ContactAddress = ({
 
   return (
     <div className="flex flex-col gap-4 px-4">
-      <Fade cascade duration={100} delay={400} direction="up" damping={0.5}>
-        <fieldset disabled={isVerifying}>
+      <Fade
+        cascade
+        duration={100}
+        delay={400}
+        direction="up"
+        triggerOnce
+        damping={0.5}
+      >
+        <fieldset disabled={isVerifying} className="space-y-2">
           <FormInput
             control={form.control}
             name="streetAddress"
-            label="Street  Address"
+            label="Street Address"
+            placeholder="street address"
             type="text"
             Icon={MapPin}
           />
@@ -29,6 +37,7 @@ const ContactAddress = ({
             control={form.control}
             name="areaNeighborhood"
             label="Area / Neighborhood"
+            placeholder="area or neighborhood"
             type="text"
             Icon={MapIcon}
           />
@@ -37,6 +46,7 @@ const ContactAddress = ({
             control={form.control}
             name="phoneNumber"
             label="Phone Number"
+            placeholder="phone number"
             type="tel"
             Icon={Phone}
           />

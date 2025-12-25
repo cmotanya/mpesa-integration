@@ -44,7 +44,14 @@ const DeliveryAddressPage = () => {
       noValidate
     >
       <div className="mb-4 text-center">
-        <Fade cascade duration={100} delay={100} direction="down" damping={0.5}>
+        <Fade
+          cascade
+          duration={100}
+          delay={100}
+          triggerOnce
+          direction="down"
+          damping={0.5}
+        >
           <div className="bg-primary mb-4 inline-flex size-15 items-center justify-center rounded-full">
             <MapPin className="text-background size-10" />
           </div>
@@ -63,7 +70,14 @@ const DeliveryAddressPage = () => {
           isGettingLocation && "pointer-events-none opacity-50",
         )}
       >
-        <Fade cascade duration={100} delay={200} direction="down" damping={0.5}>
+        <Fade
+          cascade
+          duration={100}
+          delay={200}
+          direction="down"
+          triggerOnce
+          damping={0.5}
+        >
           <div className="flex flex-col items-center justify-center gap-3">
             <Button
               buttonType="button"
@@ -94,7 +108,14 @@ const DeliveryAddressPage = () => {
           </div>
         </Fade>
 
-        <Fade cascade duration={100} delay={300} direction="up" damping={0.5}>
+        <Fade
+          cascade
+          duration={100}
+          delay={300}
+          direction="up"
+          triggerOnce
+          damping={0.5}
+        >
           <div className="relative my-5">
             <div className="absolute inset-0 flex items-center">
               <div className="border-accent/50 w-full border-t-2"></div>
