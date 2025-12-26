@@ -33,7 +33,7 @@ const FormInput = ({
               <div className="absolute inset-y-0 left-0 flex items-center pl-2">
                 <Icon
                   className={cn(
-                    "group-focus-within:text-accent text-accent transition-all duration-200 ease-in-out group-focus-within:animate-pulse",
+                    "group-focus-within:text-text/50 text-text/40 transition-all duration-200 ease-in-out group-focus-within:animate-pulse",
                     hasError && "text-error animate-pulse",
                     isSuccess && "text-success",
                   )}
@@ -51,7 +51,7 @@ const FormInput = ({
               aria-invalid={!!fieldState.error}
               aria-describedby={`${name}-error`}
               className={cn(
-                "ring-accent/30 focus:ring-accent/80 shadow-accent/5 block w-full rounded-lg py-3 ps-12 shadow-md ring transition-all duration-200 ease-in-out focus:ring focus:outline-none",
+                "ring-text/30 focus:ring-text/20 shadow-text/5 focus:shadow-text/15 block w-full rounded-lg py-3 ps-12 shadow-md ring transition-all duration-200 ease-in-out focus:shadow-lg focus:outline-none",
                 hasError && "ring-error",
                 isSuccess && "ring-success",
               )}
