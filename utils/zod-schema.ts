@@ -9,11 +9,44 @@ export const DeliveryAddressSchema = z.object({
   phoneNumber: z
     .string()
     .nonempty("Phone number is required")
-    .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number must be at most 15 digits")
-    .regex(/^(\+254|07|01)\d{9}$/, {
-      message:
-        "Phone number must start with +254, 07, or 01 and be 10 digits long.",
+    .superRefine((val, ctx) => {
+      if (val.startsWith("+254") || val.startsWith("254")) {
+        const hasPlus = val.startsWith("+");
+        const expectedLength = hasPlus ? 13 : 12;
+
+        if (val.length !== expectedLength) {
+          ctx.addIssue({
+            code: "custom",
+            message: `Phone number (${hasPlus ? "+254" : "254"}) must be ${expectedLength} digits`,
+          });
+        }
+
+        const digitPattern = hasPlus ? /^\+254\d{9}$/ : /^254\d{9}$/;
+        if (!digitPattern.test(val)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Phone number must be by exactly 9 digits",
+          });
+        }
+      } else if (val.startsWith("07") || val.startsWith("01")) {
+        if (val.length !== 10) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Phone number must be exactly 10 digits",
+          });
+        }
+        if (!/^\d+$/.test(val)) {
+          ctx.addIssue({
+            code: "custom",
+            message: "Phone number must contain only digits",
+          });
+        }
+      } else {
+        ctx.addIssue({
+          code: "custom",
+          message: " Phone number must start with 07, 01, 254, or +254",
+        });
+      }
     }),
 
   streetAddress: z

@@ -2,6 +2,7 @@ import { CreateOrderProps } from "@/utils/types";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import toast from "react-hot-toast";
+import { formatPhoneNumber } from "@/utils/formatters";
 
 const createOrder = async ({
   address,
@@ -20,7 +21,7 @@ const createOrder = async ({
         order_number: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         customer_name: address.name,
         delivery_address: `${address.streetAddress}, ${address.areaNeighborhood}`,
-        customer_phone: address.phoneNumber,
+        customer_phone: formatPhoneNumber(address.phoneNumber),
         subtotal: Math.round(subtotal * 100) / 100,
         delivery_fee: deliveryFee,
         total_amount: total,

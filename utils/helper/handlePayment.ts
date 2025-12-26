@@ -2,7 +2,6 @@ import { HandlePaymentProps } from "../types";
 import toast from "react-hot-toast";
 import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/createOrders";
-import { useEffect } from "react";
 
 const handlePayment = async (
   {
