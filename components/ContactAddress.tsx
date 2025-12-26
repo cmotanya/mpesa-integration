@@ -14,6 +14,7 @@ import { Fade } from "react-awesome-reveal";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
 import FormInput from "./FormInput";
+import handleEditClick from "@/utils/helper/handleEditClick";
 
 const ContactAddress = ({
   form,
@@ -95,7 +96,7 @@ const ContactAddress = ({
 
         <Button
           buttonType="button"
-          onClick={() => router.back()}
+          onClick={() => handleEditClick({ form, router })}
           className="group bg-secondary/10 ring-secondary/50 text-text flex w-full items-center justify-center font-medium uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
         >
           <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />{" "}

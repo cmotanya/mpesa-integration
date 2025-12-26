@@ -169,3 +169,8 @@ export type PageSectionProps = {
   setLocationError: React.Dispatch<SetStateAction<string | null>>;
   locationError: string | null;
 };
+
+export type HandleEditClickProps = {
+  form: DeliveryAddressType;
+  router: AppRouterInstance;
+};

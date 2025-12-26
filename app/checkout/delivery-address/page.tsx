@@ -5,8 +5,8 @@ import { DeliveryAddressData, DeliveryAddressSchema } from "@/utils/zod-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, MapPin, Navigation } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import PageSection from "./PageSection";
 import handleSaveAddress from "@/utils/helper/handleSaveAddress";
 
@@ -30,6 +30,20 @@ const DeliveryAddressPage = () => {
   });
 
   const { formState } = form;
+
+  const watchedValues = useWatch({ control: form.control });
+
+  useEffect(() => {
+    const savedAddress = localStorage.getItem("deliveryAddress");
+
+    if (savedAddress) form.reset(JSON.parse(savedAddress));
+  }, [form]);
+
+  useEffect(() => {
+    if (!watchedValues) return;
+
+    localStorage.setItem("deliveryAddress", JSON.stringify(watchedValues));
+  }, [watchedValues]);
 
   return (
     <form
