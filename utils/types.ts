@@ -27,7 +27,7 @@ export type MenuItem = {
 export type Category = {
   id: string | number;
   name: string;
-  display_order?: number;
+  display_order?: number | null;
   menu_items?: MenuItem[];
   items?: MenuItem[];
   slug: string;
@@ -141,9 +141,9 @@ export type CreateOrderProps = {
 };
 
 export type OrderItemProps = {
-  id: string;
+  id: MenuItem["id"];
   quantity: number;
-  unit_price: number;
+  unit_price: MenuItem["price"];
 };
 
 export type HandlePaymentProps = {
