@@ -2,6 +2,7 @@ import { HandlePaymentProps } from "../types";
 import toast from "react-hot-toast";
 import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/createOrders";
+import { fi } from "zod/locales";
 
 const handlePayment = async (
   {
@@ -25,8 +26,6 @@ const handlePayment = async (
         "Delivery address not found. Please save your delivery address first.",
       );
 
-      setIsProcessing(false);
-
       return;
     }
 
@@ -39,12 +38,11 @@ const handlePayment = async (
         position: "top-center",
         style: { color: "white" },
       });
-      setIsProcessing(false);
 
       return;
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const start = Date.now();
 
     const order = await createOrder({
       address: parsed.data,
@@ -57,12 +55,13 @@ const handlePayment = async (
       })),
     });
 
-    if (!order) {
-      toast.error("Error processing payment. Please try again.", {
-        position: "top-center",
-        style: { color: "white" },
-      });
-      return;
+    if (!order) if (!order) throw new Error("Order creation failed");
+
+    const MIN_TIME = 50000;
+    const elapsed = Date.now() - start;
+
+    if (elapsed < MIN_TIME) {
+      await new Promise((resolve) => setTimeout(resolve, MIN_TIME - elapsed));
     }
 
     clearCart();
@@ -74,6 +73,8 @@ const handlePayment = async (
       position: "top-center",
       style: { color: "white" },
     });
+  } finally {
+    setIsProcessing(false);
   }
 };
 
