@@ -23,6 +23,10 @@ const handlePayment = async (
     if (!savedAddress) {
       toast.error(
         "Delivery address not found. Please save your delivery address first.",
+        {
+          position: "top-center",
+          style: { color: "white" },
+        },
       );
 
       return;
@@ -54,7 +58,11 @@ const handlePayment = async (
       })),
     });
 
-    if (!order) throw new Error("Order creation failed - no data returned");
+    if (!order)
+      toast.error("Order creation failed - no data returned", {
+        position: "top-center",
+        style: { color: "white" },
+      });
 
     const MIN_TIME = 7000;
     const elapsed = Date.now() - start;
