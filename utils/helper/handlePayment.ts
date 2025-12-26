@@ -53,7 +53,10 @@ const handlePayment = async (
     });
 
     if (!order) {
-      toast.error("Error processing payment. Please try again.");
+      toast.error("Error processing payment. Please try again.", {
+        position: "top-center",
+        style: { color: "white" },
+      });
     }
 
     clearCart();
