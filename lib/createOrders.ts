@@ -58,8 +58,8 @@ const createOrder = async ({
     }
 
     return order;
-  } catch {
-    toast.error("Order creation failed.");
+  } catch (error) {
+    toast.error("Order creation failed." + error);
 
     return null;
   }
