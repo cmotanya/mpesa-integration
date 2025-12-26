@@ -10,6 +10,7 @@ export const Button = ({
   iconPosition,
   href,
   buttonType,
+  disabled,
   ...props
 }: ButtonProps) => {
   const baseStyle =

@@ -1,12 +1,12 @@
-import { OnSubmitProps } from "@/utils/types";
+import { HandleSubmitProps } from "@/utils/types";
 import toast from "react-hot-toast";
 
-const handleSubmit = async ({
+const handleSaveAddress = async ({
   data,
   setIsVerifying,
   form,
   router,
-}: OnSubmitProps) => {
+}: HandleSubmitProps) => {
   setIsVerifying(true);
 
   console.log("🚀 ~ file: onSubmit.ts:6 ~ onSubmit ~ data:", {
@@ -24,7 +24,7 @@ const handleSubmit = async ({
 
     router.push("/checkout");
   } catch {
-    toast.error("An error occurred. Please try again.", {
+    toast.error("Error saving address", {
       position: "top-center",
       style: { color: "white" },
     });
@@ -33,4 +33,4 @@ const handleSubmit = async ({
   }
 };
 
-export default handleSubmit;
+export default handleSaveAddress;

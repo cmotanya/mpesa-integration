@@ -2,42 +2,22 @@
 
 import { Button } from "./button";
 import Image from "next/image";
-import { useCart } from "@/contexts/CartContext";
-import { clearCartFromStorage } from "@/contexts/cart.storage";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
-export const MPesaPayment = () => {
-  const { clearFromCart } = useCart();
-  const route = useRouter();
-
-  const handlePaymentSuccess = () => {
-    clearCartFromStorage();
-    clearFromCart();
-
-    toast.success(
-      "Order Confirmed! Processing your payment and preparing your food. Thank you!",
-      {
-        duration: 3000,
-        position: "top-center",
-      },
-    );
-
-    route.push("/menu");
-  };
-
+export const MPesaPayment = ({ isProcessing }: { isProcessing: boolean }) => {
   const ImgSrc =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/512px-M-PESA_LOGO-01.svg.png?20191120100524";
 
   return (
     <div className="w-full">
-      <Button
-        onClick={() => handlePaymentSuccess()}
-        className="hover:bg-mpesa-hover/20 text-mpesa ring-mpesa bg-mpesa/10 flex w-full justify-center py-1.5 font-bold uppercase ring-2 transition-transform duration-200 hover:scale-105 active:scale-95"
-      >
-        {"Pay with "}
-
-        <Image src={ImgSrc} alt="M-PESA Logo" width={80} height={60} />
+      <Button className="hover:bg-mpesa-hover/20 text-mpesa ring-mpesa bg-mpesa/10 flex w-full justify-center py-1.5 font-bold uppercase ring-2 transition-transform duration-200 hover:scale-105 active:scale-95">
+        {isProcessing ? (
+          "Processing Payment..."
+        ) : (
+          <div>
+            {"Pay with "}
+            <Image src={ImgSrc} alt="M-PESA Logo" width={80} height={60} />
+          </div>
+        )}
       </Button>
     </div>
   );

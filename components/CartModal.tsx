@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/utils/cn";
 
 export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
-  const { cart, clearFromCart, removeFromCartItem } = useCart();
+  const { cart, clearCart, removeFromCartItem } = useCart();
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
               <div className="border-t-accent/80 flex items-center justify-between border-t-2 px-2">
                 <Fade direction="left" duration={150} delay={200} triggerOnce>
                   <Button
-                    onClick={() => clearFromCart()}
+                    onClick={() => clearCart()}
                     className="bg-error mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium"
                   >
                     Clear

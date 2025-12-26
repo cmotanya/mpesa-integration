@@ -1,6 +1,15 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { DeliveryAddressProps } from "@/utils/types";
-import { MapPin, MapIcon, Phone, ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  MapPin,
+  MapIcon,
+  Phone,
+  ArrowRight,
+  ArrowLeft,
+  User,
+} from "lucide-react";
 import { Fade } from "react-awesome-reveal";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
@@ -26,6 +35,25 @@ const ContactAddress = ({
         <fieldset disabled={isVerifying} className="space-y-2">
           <FormInput
             control={form.control}
+            name="name"
+            label="Name"
+            placeholder="name"
+            autoFocus={true}
+            type="text"
+            Icon={User}
+          />
+
+          <FormInput
+            control={form.control}
+            name="phoneNumber"
+            label="Phone Number"
+            placeholder="m-pesa number"
+            type="tel"
+            Icon={Phone}
+          />
+
+          <FormInput
+            control={form.control}
             name="streetAddress"
             label="Street Address"
             placeholder="street address"
@@ -41,21 +69,13 @@ const ContactAddress = ({
             type="text"
             Icon={MapIcon}
           />
-
-          <FormInput
-            control={form.control}
-            name="phoneNumber"
-            label="Phone Number"
-            placeholder="phone number"
-            type="tel"
-            Icon={Phone}
-          />
         </fieldset>
       </Fade>
 
       <div className="mt-8 flex w-full flex-col items-center gap-4 px-8 md:flex-row">
         <Button
           buttonType="submit"
+          disabled={isVerifying || formState.isSubmitting || !formState.isValid}
           className={cn(
             "group flex w-full items-center justify-center uppercase transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto",
             formState.errors.root &&
@@ -74,6 +94,7 @@ const ContactAddress = ({
         </Button>
 
         <Button
+          buttonType="button"
           onClick={() => router.back()}
           className="group bg-secondary/10 ring-secondary/50 text-text flex w-full items-center justify-center font-medium uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 md:w-auto"
         >

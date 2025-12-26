@@ -2,6 +2,7 @@ import type { SetStateAction, ReactNode } from "react";
 import { Control, FieldPath, UseFormReturn } from "react-hook-form";
 import { DeliveryAddressData } from "./zod-schema";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import React from "react";
 
 export type ButtonProps = {
   children: ReactNode;
@@ -11,6 +12,7 @@ export type ButtonProps = {
   href?: string;
   iconPosition?: "left" | "right";
   buttonType?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 export type MenuItem = {
@@ -95,10 +97,10 @@ export type DeliveryAddressProps = {
   isVerifying: boolean;
 };
 
-export type OnSubmitProps = {
+export type HandleSubmitProps = {
   data: DeliveryAddressData;
   setIsVerifying: React.Dispatch<SetStateAction<boolean>>;
-  form: DeliveryAddressType;
+  form: UseFormReturn<DeliveryAddressData> & DeliveryAddressType;
   router: AppRouterInstance;
 };
 
@@ -120,6 +122,7 @@ export type FormInputProps = {
   label: string;
   placeholder: string;
   type: string;
+  autoFocus?: boolean;
   Icon: React.ElementType;
 };
 
@@ -128,4 +131,42 @@ export type CustomLinkProps = {
   children: ReactNode;
   Icon?: React.ElementType;
   className?: string;
+};
+
+export type CreateOrderProps = {
+  address: DeliveryAddressData;
+  subtotal: number;
+  deliveryFee: number;
+  items: OrderItemProps[];
+};
+
+export type OrderItemProps = {
+  id: MenuItem["id"];
+  quantity: number;
+  unit_price: MenuItem["price"];
+};
+
+export type HandlePaymentProps = {
+  setIsProcessing: React.Dispatch<SetStateAction<boolean>>;
+  cart: CartItem[];
+  subtotal: number;
+  deliveryFee: number;
+  clearCart: () => void;
+  router: AppRouterInstance;
+};
+
+export type PageSectionProps = {
+  IconNavigation: React.ElementType;
+  IconAlertCircle: React.ElementType;
+  IconMap: React.ElementType;
+  children: ReactNode;
+  title: string;
+  description: string;
+  text: string;
+  form: DeliveryAddressType;
+  formState: DeliveryAddressType["formState"];
+  isGettingLocation: boolean;
+  setIsGettingLocation: React.Dispatch<SetStateAction<boolean>>;
+  setLocationError: React.Dispatch<SetStateAction<string | null>>;
+  locationError: string | null;
 };

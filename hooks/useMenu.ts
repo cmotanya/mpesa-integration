@@ -1,7 +1,7 @@
 "use client";
 
 import fetchMenu from "@/components/FetchMenu";
-import { slugify } from "@/utils/helper";
+import { slugify } from "@/utils/slugify";
 import { Category, UseMenuProps } from "@/utils/types";
 import { useEffect } from "react";
 

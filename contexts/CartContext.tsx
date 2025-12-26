@@ -22,7 +22,7 @@ type CartContextType = {
     change: number,
   ) => void;
   removeFromCartItem: (itemId: string) => void;
-  clearFromCart: () => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -54,7 +54,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: "REMOVE_ITEM", payload: { itemId } });
   };
 
-  const clearFromCart = () => {
+  const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
   };
 
@@ -65,7 +65,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         addToCartItem,
         updateQuantityToCart,
         removeFromCartItem,
-        clearFromCart,
+        clearCart,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { DeliveryAddressType } from "./types";
+import { DeliveryAddressType } from "../types";
 
 export const saveDeliveryData = (form: DeliveryAddressType) => {
   const isDataValid = form.trigger();

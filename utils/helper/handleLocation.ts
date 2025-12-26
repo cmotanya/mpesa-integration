@@ -1,5 +1,5 @@
+import { HandleLocationProps } from "../types";
 import { reverseGeocode } from "./reverseLocation";
-import { HandleLocationProps } from "./types";
 
 export const handleLocationClick = async ({
   setIsGettingLocation,
