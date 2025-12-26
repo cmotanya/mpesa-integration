@@ -32,8 +32,13 @@ const handlePayment = async (
 
     const address = JSON.parse(savedAddress) as DeliveryAddressData;
 
-    if (!DeliveryAddressSchema.safeParse(address.phoneNumber).success) {
-      toast.error("Please enter a valid M-Pesa phone number.");
+    const parsed = DeliveryAddressSchema.safeParse(address);
+
+    if (!parsed.success) {
+      toast.error("Invalid phone number", {
+        position: "top-center",
+        style: { color: "white" },
+      });
       setIsProcessing(false);
 
       return;
@@ -42,7 +47,7 @@ const handlePayment = async (
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const order = await createOrder({
-      address,
+      address: parsed.data,
       subtotal,
       deliveryFee,
       items: cart.map((item) => ({
@@ -64,7 +69,10 @@ const handlePayment = async (
 
     router.push("/menu");
   } catch {
-    toast.error("Error processing payment. Please try again.");
+    toast.error("Error processing payment. Please try again.", {
+      position: "top-center",
+      style: { color: "white" },
+    });
   }
 };
 
