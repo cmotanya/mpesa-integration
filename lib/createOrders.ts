@@ -1,6 +1,7 @@
 import { CreateOrderProps } from "@/utils/types";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
+import toast from "react-hot-toast";
 
 const createOrder = async ({
   address,
@@ -11,16 +12,16 @@ const createOrder = async ({
   Database["public"]["Tables"]["orders"]["Row"] | null
 > => {
   try {
-    const total = subtotal + deliveryFee;
+    const total = Math.round(subtotal + deliveryFee * 100) / 100;
 
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({
-        order_number: `ORD-${Date.now()}`,
+        order_number: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         customer_name: address.name,
         delivery_address: `${address.streetAddress}, ${address.areaNeighborhood}`,
         customer_phone: address.phoneNumber,
-        subtotal,
+        subtotal: Math.round(subtotal * 100) / 100,
         delivery_fee: deliveryFee,
         total_amount: total,
         payment_method: "mpesa",
@@ -31,6 +32,11 @@ const createOrder = async ({
       .single();
 
     if (orderError) throw orderError;
+
+    if (!order) {
+      toast.error("Order creation failed - no data returned");
+      return null;
+    }
 
     const orderItem = items.map((item) => ({
       order_id: order.id,
@@ -44,11 +50,15 @@ const createOrder = async ({
       .from("order_items")
       .insert(orderItem);
 
-    if (itemError) throw itemError;
+    if (itemError) {
+      toast.error(
+        "Order items failed, but order was created. Order ID:" + order.id,
+      );
+    }
 
     return order;
-  } catch (error) {
-    console.error("Error creating order:", error);
+  } catch {
+    toast.error("Order creation failed.");
 
     return null;
   }
