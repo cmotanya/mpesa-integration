@@ -18,7 +18,7 @@ export type ButtonProps = {
 export type MenuItem = {
   id: string;
   name: string;
-  description: string;
+  description: string | null;
   price: number;
   imageUrl?: string;
   is_available: boolean;
