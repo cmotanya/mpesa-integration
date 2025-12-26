@@ -34,10 +34,7 @@ const createOrder = async ({
 
     if (orderError) throw orderError;
 
-    if (!order) {
-      toast.error("Order creation failed - no data returned");
-      return null;
-    }
+    if (!order) throw new Error("Order creation failed - no data returned");
 
     const orderItem = items.map((item) => ({
       order_id: order.id,
@@ -51,15 +48,11 @@ const createOrder = async ({
       .from("order_items")
       .insert(orderItem);
 
-    if (itemError) {
-      toast.error(
-        "Order items failed, but order was created. Order ID:" + order.id,
-      );
-    }
+    if (itemError) throw itemError;
 
     return order;
   } catch (error) {
-    toast.error("Order creation failed." + error);
+    console.error("Order creation failed." + error);
 
     return null;
   }

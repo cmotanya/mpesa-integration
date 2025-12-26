@@ -2,7 +2,6 @@ import { HandlePaymentProps } from "../types";
 import toast from "react-hot-toast";
 import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/createOrders";
-import { fi } from "zod/locales";
 
 const handlePayment = async (
   {
@@ -55,9 +54,9 @@ const handlePayment = async (
       })),
     });
 
-    if (!order) if (!order) throw new Error("Order creation failed");
+    if (!order) throw new Error("Order creation failed - no data returned");
 
-    const MIN_TIME = 50000;
+    const MIN_TIME = 7000;
     const elapsed = Date.now() - start;
 
     if (elapsed < MIN_TIME) {
