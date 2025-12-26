@@ -1,19 +1,12 @@
-import { HandleSubmitProps } from "@/utils/types";
+import { HandleSaveProps } from "@/utils/types";
 import toast from "react-hot-toast";
 
 const handleSaveAddress = async ({
   data,
   setIsVerifying,
-  form,
   router,
-}: HandleSubmitProps) => {
+}: HandleSaveProps) => {
   setIsVerifying(true);
-
-  console.log("🚀 ~ file: onSubmit.ts:6 ~ onSubmit ~ data:", {
-    streetAddress: form.getValues("streetAddress"),
-    areaNeighborhood: form.getValues("areaNeighborhood"),
-    phoneNumber: form.getValues("phoneNumber"),
-  });
 
   try {
     localStorage.setItem("deliveryAddress", JSON.stringify(data));

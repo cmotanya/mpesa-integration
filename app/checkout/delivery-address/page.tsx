@@ -1,7 +1,6 @@
 "use client";
 
 import ContactAddress from "@/components/ContactAddress";
-import handleSubmit from "@/utils/helper/handleSaveAddress";
 import { DeliveryAddressData, DeliveryAddressSchema } from "@/utils/zod-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, MapPin, Navigation } from "lucide-react";
@@ -9,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import PageSection from "./PageSection";
+import handleSaveAddress from "@/utils/helper/handleSaveAddress";
 
 const DeliveryAddressPage = () => {
   const [isGettingLocation, setIsGettingLocation] = useState(false);
@@ -34,7 +34,7 @@ const DeliveryAddressPage = () => {
   return (
     <form
       onSubmit={form.handleSubmit((data) =>
-        handleSubmit({ data, setIsVerifying, form, router }),
+        handleSaveAddress({ data, setIsVerifying, router }),
       )}
       className="container my-8 flex min-h-screen w-full flex-col gap-8"
       noValidate

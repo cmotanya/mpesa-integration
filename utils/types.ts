@@ -97,10 +97,9 @@ export type DeliveryAddressProps = {
   isVerifying: boolean;
 };
 
-export type HandleSubmitProps = {
+export type HandleSaveProps = {
   data: DeliveryAddressData;
   setIsVerifying: React.Dispatch<SetStateAction<boolean>>;
-  form: UseFormReturn<DeliveryAddressData> & DeliveryAddressType;
   router: AppRouterInstance;
 };
 
