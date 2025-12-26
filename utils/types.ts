@@ -141,9 +141,9 @@ export type CreateOrderProps = {
 };
 
 export type OrderItemProps = {
-  id: MenuItem["id"];
+  id: string;
   quantity: number;
-  unit_price: MenuItem["price"];
+  unit_price: number;
 };
 
 export type HandlePaymentProps = {
