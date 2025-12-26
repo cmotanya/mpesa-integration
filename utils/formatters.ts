@@ -28,6 +28,18 @@ export const formatDateTime = (date: Date): string => {
   return `${formatDate(date)} at ${formatTime(date)}`;
 };
 
-export const formatPhoneNumber = (phoneNumber: string): string => {
-  return phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+const formatPhoneNumber = (phone: string) => {
+  const formatted = phone.replace(/\s+/g, "");
+
+  if (formatted.startsWith("+")) {
+    formatted.substring(1);
+  }
+
+  if (formatted.startsWith("0")) {
+    return "254" + formatted.substring(1);
+  }
+
+  return formatted;
 };
+
+export default formatPhoneNumber;

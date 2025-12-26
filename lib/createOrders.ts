@@ -2,7 +2,7 @@ import { CreateOrderProps } from "@/utils/types";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import toast from "react-hot-toast";
-import { formatPhoneNumber } from "@/utils/formatters";
+import formatPhoneNumber from "@/utils/formatters";
 
 const createOrder = async ({
   address,
