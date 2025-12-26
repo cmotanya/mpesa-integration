@@ -35,7 +35,7 @@ const handlePayment = async (
     const parsed = DeliveryAddressSchema.safeParse(address);
 
     if (!parsed.success) {
-      toast.error("Invalid phone number", {
+      toast.error(" Error saving address.Please review your details", {
         position: "top-center",
         style: { color: "white" },
       });
@@ -62,6 +62,7 @@ const handlePayment = async (
         position: "top-center",
         style: { color: "white" },
       });
+      return;
     }
 
     clearCart();
