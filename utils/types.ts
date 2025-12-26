@@ -20,8 +20,8 @@ export type MenuItem = {
   name: string;
   description: string | null;
   price: number;
-  imageUrl?: string;
-  is_available: boolean;
+  imageUrl?: string | null;
+  is_available: boolean | null;
 };
 
 export type Category = {
