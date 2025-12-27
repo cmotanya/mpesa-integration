@@ -174,3 +174,13 @@ export type HandleEditClickProps = {
   form: DeliveryAddressType;
   router: AppRouterInstance;
 };
+
+export type OrderSummaryItemsProps = {
+  label: string;
+  value: string;
+};
+
+export type OrderSummaryProps = {
+  title?: string;
+  items: OrderSummaryItemsProps[];
+};

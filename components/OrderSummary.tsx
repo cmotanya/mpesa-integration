@@ -2,7 +2,6 @@ import { useCart } from "@/contexts/CartContext";
 import { subTotal } from "@/utils/helper/subTotal";
 import { total } from "@/utils/helper/totalSum";
 import { ClipboardList } from "lucide-react";
-import React from "react";
 import { Fade } from "react-awesome-reveal";
 
 const OrderSummary = () => {

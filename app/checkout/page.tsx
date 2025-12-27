@@ -32,11 +32,11 @@ export const FoodOrderCheckout = () => {
   return (
     <form
       onSubmit={(e) => handlePayment(paymentData, e)}
-      className="m-auto flex min-h-screen w-full flex-col items-center justify-center space-y-6 px-3"
+      className="container m-auto flex min-h-screen w-full flex-col items-center justify-center space-y-6 px-3 py-8"
     >
-      <div className="mb-6">
-        <Fade duration={150} cascade>
-          <h1 className="font-primary text-center text-2xl font-bold uppercase">
+      <div className="mb-6 text-center">
+        <Fade duration={150} cascade triggerOnce>
+          <h1 className="text-3xl font-bold uppercase">
             Complete your order 🚀
           </h1>
           <p className="text-text/70 mt-2 text-sm font-medium md:text-base">
@@ -45,17 +45,26 @@ export const FoodOrderCheckout = () => {
         </Fade>
       </div>
 
-      <OrderSummary />
+      {/* Order Summary Card */}
+      <Fade duration={100} delay={200} direction="up" triggerOnce>
+        <OrderSummary />
+      </Fade>
 
-      <div className="mt-8 flex w-full flex-col items-center justify-between gap-4 px-4 md:flex-row">
-        <MPesaPayment isProcessing={isProcessing} />
+      <div className="w-full max-w-md space-y-6 p-6">
+        <Fade duration={100} delay={300} direction="up" triggerOnce>
+          {/* MPesa Payment Form */}
+          <MPesaPayment isProcessing={isProcessing} />
+        </Fade>
 
-        <Button
-          onClick={() => router.back()}
-          className="flex w-full justify-center uppercase md:w-auto"
-        >
-          <ArrowLeft /> Edit Address
-        </Button>
+        <Fade duration={100} delay={400} direction="up" triggerOnce>
+          <Button
+            onClick={() => router.back()}
+            className="bg-secondary/10 ring-secondary/50 text-text/80 flex w-full items-center justify-center gap-2 p-4 font-bold uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+          >
+            <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />
+            Edit Address
+          </Button>
+        </Fade>
       </div>
     </form>
   );
