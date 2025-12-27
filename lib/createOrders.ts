@@ -4,55 +4,70 @@ import { Database } from "./database.types";
 import toast from "react-hot-toast";
 import formatPhoneNumber from "@/utils/formatters";
 
+type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
+
 const createOrder = async ({
   address,
   subtotal,
   deliveryFee,
   items,
-}: CreateOrderProps): Promise<
-  Database["public"]["Tables"]["orders"]["Row"] | null
-> => {
+}: CreateOrderProps): Promise<OrderRow | null> => {
   try {
+    if (!items || items.length === 0) {
+      throw new Error("Cannot create orders without items");
+    }
+
+    if (!address.name || !address.phoneNumber) {
+      throw new Error("Customer name and phone number are required");
+    }
+
+    deliveryFee = Math.round(deliveryFee * 100) / 100;
+    subtotal = Math.round(subtotal * 100) / 100;
     const total = Math.round(subtotal + deliveryFee * 100) / 100;
 
-    const { data: order, error: orderError } = await supabase
-      .from("orders")
-      .insert({
-        order_number: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-        customer_name: address.name,
-        delivery_address: `${address.streetAddress}, ${address.areaNeighborhood}`,
-        customer_phone: formatPhoneNumber(address.phoneNumber),
-        subtotal: Math.round(subtotal * 100) / 100,
-        delivery_fee: deliveryFee,
-        total_amount: total,
-        payment_method: "mpesa",
-        payment_status: "pending",
-        order_status: "pending",
-      })
-      .select()
-      .single();
+    const timestamp = Date.now();
+    const random = Math.floor(Math.random() * 10000);
+    const orderNumber = `ORD-${timestamp}-${random}`;
 
-    if (orderError) throw orderError;
+    const orderData = {
+      order_number: orderNumber,
+      customer_name: address.name.trim(),
+      delivery_address:
+        `${address.streetAddress}, ${address.areaNeighborhood}`.trim(),
+      customer_phone: formatPhoneNumber(address.phoneNumber),
+      subtotal: Math.round(subtotal * 100) / 100,
+      delivery_fee: deliveryFee,
+      total_amount: total,
+      payment_method: "mpesa",
+      payment_status: "pending",
+      order_status: "pending",
+    };
 
-    if (!order) throw new Error("Order creation failed - no data returned");
-
-    const orderItem = items.map((item) => ({
-      order_id: order.id,
+    const itemsData = items.map((item) => ({
       menu_item_id: item.id,
       quantity: item.quantity,
-      unit_price: item.unit_price,
-      subtotal: item.unit_price * item.quantity,
+      unit_price: Math.round(item.unit_price * 100) / 100,
+      subtotal: Math.round(item.unit_price * item.quantity * 100) / 100,
     }));
 
-    const { error: itemError } = await supabase
-      .from("order_items")
-      .insert(orderItem);
+    const { data, error } = await supabase.rpc("create_order_transaction", {
+      order_data: orderData,
+      items_data: itemsData,
+    });
 
-    if (itemError) throw itemError;
+    if (error) throw error;
 
-    return order;
+    if (!data) throw new Error("Order creation failed - no data returned");
+
+    return data as OrderRow;
   } catch (error) {
-    console.error("Order creation failed." + error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+
+    toast.error(
+      errorMessage.includes("items") ? "Order already exists" : errorMessage,
+      { position: "top-center", style: { color: "white" } },
+    );
 
     return null;
   }

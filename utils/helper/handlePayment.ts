@@ -64,12 +64,9 @@ const handlePayment = async (
         style: { color: "white" },
       });
 
-    const MIN_TIME = 7000;
     const elapsed = Date.now() - start;
 
-    if (elapsed < MIN_TIME) {
-      await new Promise((resolve) => setTimeout(resolve, MIN_TIME - elapsed));
-    }
+    await new Promise((resolve) => setTimeout(resolve, elapsed));
 
     clearCart();
     localStorage.removeItem("deliveryAddress");
