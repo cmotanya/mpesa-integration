@@ -2,7 +2,6 @@ import { CreateOrderProps } from "@/utils/types";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
 import formatPhoneNumber from "@/utils/formatters";
-import { showToast } from "@/utils/toast";
 
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
 
@@ -59,17 +58,8 @@ const createOrder = async ({
 
     if (!data) throw new Error("Order not returned from database");
 
-    // showToast.success(`Order ${orderNumber} created successfully!`);
-
     return data as OrderRow;
   } catch (error) {
-    // const errorMessage =
-    //   error instanceof Error ? error.message : "Unknown error";
-
-    // showToast.error(
-    //   errorMessage.includes("items") ? "Order already exists" : errorMessage,
-    // );
-
     console.error("Error creating order:", error);
     return null;
   }

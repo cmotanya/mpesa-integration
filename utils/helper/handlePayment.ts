@@ -3,14 +3,6 @@ import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/orders";
 import { showToast } from "../toast";
 
-// const handleError = (
-//   error: string,
-//   setIsProcessing: (value: boolean) => void,
-// ) => {
-//   showToast.error(error);
-//   setIsProcessing(false);
-// };
-
 const handlePayment = async (
   {
     setIsProcessing,
@@ -65,8 +57,8 @@ const handlePayment = async (
       })),
     });
 
-    if (!order) {
-      showToast.error("Order creation failed - no data returned");
+    if (!order?.id) {
+      showToast.error("Order could not be confirmed. Please try again.");
 
       return;
     }
