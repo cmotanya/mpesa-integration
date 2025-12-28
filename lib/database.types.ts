@@ -178,8 +178,61 @@ export type Database = {
     }
     Functions: {
       create_order_transaction: {
-        Args: { items_data: Json; order_data: Json }
-        Returns: Json
+        Args: { p_items_data: Json; p_order_data: Json }
+        Returns: {
+          created_at: string | null
+          customer_name: string
+          customer_phone: string
+          delivery_address: string | null
+          delivery_fee: number | null
+          id: string
+          mpesa_transaction_id: string | null
+          notes: string | null
+          order_number: string
+          order_status: string | null
+          payment_method: string | null
+          payment_status: string | null
+          subtotal: number
+          total_amount: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "orders"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      create_order_with_items: {
+        Args: {
+          p_area_neighborhood: string
+          p_delivery_fee: number
+          p_items: Json
+          p_phone_number: string
+          p_street_address: string
+          p_subtotal: number
+        }
+        Returns: {
+          created_at: string | null
+          customer_name: string
+          customer_phone: string
+          delivery_address: string | null
+          delivery_fee: number | null
+          id: string
+          mpesa_transaction_id: string | null
+          notes: string | null
+          order_number: string
+          order_status: string | null
+          payment_method: string | null
+          payment_status: string | null
+          subtotal: number
+          total_amount: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "orders"
+          isOneToOne: true
+          isSetofReturn: false
+        }
       }
     }
     Enums: {
