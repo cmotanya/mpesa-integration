@@ -63,13 +63,14 @@ const createOrder = async ({
 
     return data as OrderRow;
   } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
+    // const errorMessage =
+    //   error instanceof Error ? error.message : "Unknown error";
 
-    showToast.error(
-      errorMessage.includes("items") ? "Order already exists" : errorMessage,
-    );
+    // showToast.error(
+    //   errorMessage.includes("items") ? "Order already exists" : errorMessage,
+    // );
 
+    console.error("Error creating order:", error);
     return null;
   }
 };
