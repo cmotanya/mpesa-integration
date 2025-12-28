@@ -1,7 +1,15 @@
 import { HandlePaymentProps } from "../types";
-import toast from "react-hot-toast";
 import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/createOrders";
+import { showToast } from "../toast";
+
+const handleError = (
+  error: string,
+  setIsProcessing: (value: boolean) => void,
+) => {
+  showToast.error(error);
+  setIsProcessing(false);
+};
 
 const handlePayment = async (
   {
@@ -21,12 +29,9 @@ const handlePayment = async (
     const savedAddress = localStorage.getItem("deliveryAddress");
 
     if (!savedAddress) {
-      toast.error(
-        "Delivery address not found. Please save your delivery address first.",
-        {
-          position: "top-center",
-          style: { color: "white" },
-        },
+      handleError(
+        "Delivery address not found. Please save your delivery address first",
+        setIsProcessing,
       );
 
       return;
@@ -37,10 +42,16 @@ const handlePayment = async (
     const parsed = DeliveryAddressSchema.safeParse(address);
 
     if (!parsed.success) {
-      toast.error(" Error saving address.Please review your details", {
-        position: "top-center",
-        style: { color: "white" },
-      });
+      showToast.error(" Error saving address.Please review your details");
+
+      return;
+    }
+
+    if (cart.length === 0) {
+      handleError(
+        "Your cart is empty. Please add items to your cart.",
+        setIsProcessing,
+      );
 
       return;
     }
@@ -58,25 +69,26 @@ const handlePayment = async (
       })),
     });
 
-    if (!order)
-      toast.error("Order creation failed - no data returned", {
-        position: "top-center",
-        style: { color: "white" },
-      });
+    if (!order) {
+      handleError("Order creation failed - no data returned", setIsProcessing);
+
+      return;
+    }
 
     const elapsed = Date.now() - start;
 
-    await new Promise((resolve) => setTimeout(resolve, elapsed));
+    if (elapsed < 2000) {
+      await new Promise((resolve) => setTimeout(resolve, elapsed));
+    }
+
+    showToast.success("Order placed successfully! 🎉");
 
     clearCart();
     localStorage.removeItem("deliveryAddress");
 
-    router.push("/menu");
+    router.push("/order-confirmation/" + order?.id);
   } catch {
-    toast.error("Error processing payment. Please try again.", {
-      position: "top-center",
-      style: { color: "white" },
-    });
+    handleError("Error processing payment. Please try again.", setIsProcessing);
   } finally {
     setIsProcessing(false);
   }

@@ -127,7 +127,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
                 <Fade direction="left" duration={150} delay={200} triggerOnce>
                   <Button
                     onClick={() => clearCart()}
-                    className="bg-error mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium"
+                    className="bg-error mt-4 ml-auto w-fit cursor-pointer rounded-xl p-3 text-xs font-medium uppercase"
                   >
                     Clear
                   </Button>
@@ -136,7 +136,7 @@ export const CartModal = ({ showCart, setShowCart }: CartModalProps) => {
                 <Fade direction="right" duration={150} delay={200} triggerOnce>
                   <Button
                     href="/checkout/delivery-address"
-                    className="ase mt-4 ml-auto w-fit cursor-pointer p-3 text-sm font-medium"
+                    className="mt-4 ml-auto w-fit cursor-pointer rounded-xl p-3 text-xs font-medium uppercase"
                   >
                     Proceed to Checkout
                   </Button>

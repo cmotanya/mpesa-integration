@@ -59,7 +59,7 @@ export const FoodOrderCheckout = () => {
         <Fade duration={100} delay={400} direction="up" triggerOnce>
           <Button
             onClick={() => router.back()}
-            className="bg-secondary/10 ring-secondary/50 text-text/80 flex w-full items-center justify-center gap-2 p-4 font-bold uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
+            className="bg-secondary/10 ring-secondary text-text/80 flex w-full items-center justify-center gap-2 p-4 uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
           >
             <ArrowLeft className="transition-transform duration-200 group-hover:-translate-x-1 group-active:-translate-x-1" />
             Edit Address

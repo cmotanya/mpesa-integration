@@ -1,10 +1,10 @@
 import "./globals.css";
 import { grotesk, sora } from "@/utils/font";
 import { siteMetaData } from "@/data/metadata";
-import { AppToast } from "@/utils/toast";
 import { Footer } from "./footer";
 import { CartProvider } from "@/contexts/CartContext";
 import Header from "./header/page";
+import { AppToast } from "@/components/AppToast";
 
 export const metadata = siteMetaData;
 

@@ -10,11 +10,10 @@ export const Button = ({
   iconPosition,
   href,
   buttonType,
-  disabled,
   ...props
 }: ButtonProps) => {
   const baseStyle =
-    "flex items-center group cursor-pointer bg-primary text-white text-center w-auto gap-2 rounded-full px-4 py-4 disabled:cursor-not-allowed";
+    "flex items-center group cursor-pointer bg-primary text-background font-medium text-center w-auto gap-2 rounded-xl px-4 py-4 disabled:cursor-not-allowed";
 
   const buttonContent = (
     <>

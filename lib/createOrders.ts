@@ -23,7 +23,7 @@ const createOrder = async ({
 
     deliveryFee = Math.round(deliveryFee * 100) / 100;
     subtotal = Math.round(subtotal * 100) / 100;
-    const total = Math.round(subtotal + deliveryFee * 100) / 100;
+    const total = Math.round((subtotal + deliveryFee) * 100) / 100;
 
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 10000);
