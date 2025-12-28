@@ -11,6 +11,7 @@ const FormInput = ({
   placeholder,
   autoFocus,
   Icon,
+  className,
 }: FormInputProps) => (
   <Controller
     control={control}
@@ -54,6 +55,7 @@ const FormInput = ({
                 "ring-secondary/50 focus:ring-secondary shadow-accent/5 focus:shadow-text/15 block w-full rounded-lg py-3 ps-12 shadow-md ring transition-all duration-200 ease-in-out focus:shadow-lg focus:outline-none",
                 hasError && "ring-error",
                 isSuccess && "ring-success",
+                className,
               )}
             />
           </div>

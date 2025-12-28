@@ -7,7 +7,6 @@ import { Fade } from "react-awesome-reveal";
 const PageSection = ({
   IconNavigation,
   IconAlertCircle,
-  IconMap,
   form,
   title,
   description,
@@ -20,7 +19,7 @@ const PageSection = ({
 }: PageSectionProps) => {
   return (
     <>
-      <div className="mb-4 text-center">
+      <div className="mt-8 text-center">
         <Fade
           cascade
           duration={100}
@@ -29,13 +28,9 @@ const PageSection = ({
           direction="down"
           damping={0.5}
         >
-          <div className="bg-primary mb-4 inline-flex size-15 items-center justify-center rounded-full">
-            <IconMap className="text-background size-10" />
-          </div>
-
           <p className="text-3xl font-bold uppercase">{title}</p>
 
-          <p className="text-text/70 text-sm">{description}</p>
+          <p className="text-text/70 text-sm font-medium">{description}</p>
         </Fade>
       </div>
 
@@ -74,12 +69,14 @@ const PageSection = ({
                 : "Use Current Location"}
             </Button>
 
-            {locationError && (
-              <div className="flex max-w-md items-start gap-2 rounded-lg bg-red-50 p-3 text-sm text-red-700">
-                <IconAlertCircle size={20} className="mt-0.5 shrink-0" />
-                <p>{locationError}</p>
-              </div>
-            )}
+            <Fade direction="up" duration={100} damping={0.5} triggerOnce>
+              {locationError && (
+                <div className="flex max-w-md items-start gap-2 rounded-lg bg-red-50 p-3 text-sm text-red-700">
+                  <IconAlertCircle size={20} className="mt-0.5 shrink-0" />
+                  <p>{locationError}</p>
+                </div>
+              )}
+            </Fade>
           </div>
         </Fade>
 

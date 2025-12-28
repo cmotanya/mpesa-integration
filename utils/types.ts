@@ -123,6 +123,7 @@ export type FormInputProps = {
   type: string;
   autoFocus?: boolean;
   Icon: React.ElementType;
+  className?: string;
 };
 
 export type CustomLinkProps = {
