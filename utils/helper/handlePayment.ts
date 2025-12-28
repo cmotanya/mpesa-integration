@@ -1,6 +1,6 @@
 import { HandlePaymentProps } from "../types";
 import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
-import createOrder from "@/lib/createOrders";
+import createOrder from "@/lib/orders";
 import { showToast } from "../toast";
 
 const handleError = (

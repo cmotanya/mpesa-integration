@@ -37,34 +37,46 @@ export type Database = {
       }
       menu_items: {
         Row: {
-          category_id: string
+          available: boolean | null
+          category: string | null
+          category_id: string | null
           created_at: string | null
           description: string | null
+          display_order: number | null
           id: string
           image_url: string | null
           is_available: boolean | null
           name: string
           price: number
+          updated_at: string | null
         }
         Insert: {
-          category_id: string
+          available?: boolean | null
+          category?: string | null
+          category_id?: string | null
           created_at?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
           image_url?: string | null
           is_available?: boolean | null
           name: string
           price: number
+          updated_at?: string | null
         }
         Update: {
-          category_id?: string
+          available?: boolean | null
+          category?: string | null
+          category_id?: string | null
           created_at?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
           image_url?: string | null
           is_available?: boolean | null
           name?: string
           price?: number
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -126,10 +138,9 @@ export type Database = {
           created_at: string | null
           customer_name: string
           customer_phone: string
-          delivery_address: string | null
-          delivery_fee: number | null
+          delivery_address: string
+          delivery_fee: number
           id: string
-          mpesa_transaction_id: string | null
           notes: string | null
           order_number: string
           order_status: string | null
@@ -137,15 +148,15 @@ export type Database = {
           payment_status: string | null
           subtotal: number
           total_amount: number
+          updated_at: string | null
         }
         Insert: {
           created_at?: string | null
           customer_name: string
           customer_phone: string
-          delivery_address?: string | null
-          delivery_fee?: number | null
+          delivery_address: string
+          delivery_fee: number
           id?: string
-          mpesa_transaction_id?: string | null
           notes?: string | null
           order_number: string
           order_status?: string | null
@@ -153,15 +164,15 @@ export type Database = {
           payment_status?: string | null
           subtotal: number
           total_amount: number
+          updated_at?: string | null
         }
         Update: {
           created_at?: string | null
           customer_name?: string
           customer_phone?: string
-          delivery_address?: string | null
-          delivery_fee?: number | null
+          delivery_address?: string
+          delivery_fee?: number
           id?: string
-          mpesa_transaction_id?: string | null
           notes?: string | null
           order_number?: string
           order_status?: string | null
@@ -169,6 +180,7 @@ export type Database = {
           payment_status?: string | null
           subtotal?: number
           total_amount?: number
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -183,10 +195,9 @@ export type Database = {
           created_at: string | null
           customer_name: string
           customer_phone: string
-          delivery_address: string | null
-          delivery_fee: number | null
+          delivery_address: string
+          delivery_fee: number
           id: string
-          mpesa_transaction_id: string | null
           notes: string | null
           order_number: string
           order_status: string | null
@@ -194,6 +205,7 @@ export type Database = {
           payment_status: string | null
           subtotal: number
           total_amount: number
+          updated_at: string | null
         }
         SetofOptions: {
           from: "*"
@@ -202,23 +214,15 @@ export type Database = {
           isSetofReturn: false
         }
       }
-      create_order_with_items: {
-        Args: {
-          p_area_neighborhood: string
-          p_delivery_fee: number
-          p_items: Json
-          p_phone_number: string
-          p_street_address: string
-          p_subtotal: number
-        }
+      get_orders_by_phone: {
+        Args: { p_phone: string }
         Returns: {
           created_at: string | null
           customer_name: string
           customer_phone: string
-          delivery_address: string | null
-          delivery_fee: number | null
+          delivery_address: string
+          delivery_fee: number
           id: string
-          mpesa_transaction_id: string | null
           notes: string | null
           order_number: string
           order_status: string | null
@@ -226,12 +230,13 @@ export type Database = {
           payment_status: string | null
           subtotal: number
           total_amount: number
-        }
+          updated_at: string | null
+        }[]
         SetofOptions: {
           from: "*"
           to: "orders"
-          isOneToOne: true
-          isSetofReturn: false
+          isOneToOne: false
+          isSetofReturn: true
         }
       }
     }

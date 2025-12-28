@@ -1,8 +1,8 @@
 import { CreateOrderProps } from "@/utils/types";
 import { supabase } from "./supabase";
 import { Database } from "./database.types";
-import toast from "react-hot-toast";
 import formatPhoneNumber from "@/utils/formatters";
+import { showToast } from "@/utils/toast";
 
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
 
@@ -59,17 +59,35 @@ const createOrder = async ({
 
     if (!data) throw new Error("Order creation failed - no data returned");
 
+    showToast.success(`Order ${orderNumber} created successfully!`);
+
     return data as OrderRow;
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
 
-    toast.error(
+    showToast.error(
       errorMessage.includes("items") ? "Order already exists" : errorMessage,
-      { position: "top-center", style: { color: "white" } },
     );
 
     return null;
+  }
+};
+
+export const getOrdersByPhone = async (phone: string): Promise<OrderRow[]> => {
+  try {
+    const formattedPhone = formatPhoneNumber(phone);
+
+    const { data, error } = await supabase.rpc("get_orders_by_phone", {
+      p_phone: formattedPhone,
+    });
+
+    if (error) throw error;
+
+    return (data as OrderRow[]) || [];
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return [];
   }
 };
 
