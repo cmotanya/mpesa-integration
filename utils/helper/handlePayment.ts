@@ -3,13 +3,13 @@ import { DeliveryAddressSchema, DeliveryAddressData } from "../zod-schema";
 import createOrder from "@/lib/orders";
 import { showToast } from "../toast";
 
-const handleError = (
-  error: string,
-  setIsProcessing: (value: boolean) => void,
-) => {
-  showToast.error(error);
-  setIsProcessing(false);
-};
+// const handleError = (
+//   error: string,
+//   setIsProcessing: (value: boolean) => void,
+// ) => {
+//   showToast.error(error);
+//   setIsProcessing(false);
+// };
 
 const handlePayment = async (
   {
@@ -29,9 +29,8 @@ const handlePayment = async (
     const savedAddress = localStorage.getItem("deliveryAddress");
 
     if (!savedAddress) {
-      handleError(
+      showToast.error(
         "Delivery address not found. Please save your delivery address first",
-        setIsProcessing,
       );
 
       return;
@@ -48,10 +47,7 @@ const handlePayment = async (
     }
 
     if (cart.length === 0) {
-      handleError(
-        "Your cart is empty. Please add items to your cart.",
-        setIsProcessing,
-      );
+      showToast.error("Your cart is empty. Please add items to your cart.");
 
       return;
     }
@@ -70,7 +66,7 @@ const handlePayment = async (
     });
 
     if (!order) {
-      handleError("Order creation failed - no data returned", setIsProcessing);
+      showToast.error("Order creation failed - no data returned");
 
       return;
     }
@@ -88,7 +84,7 @@ const handlePayment = async (
 
     router.push("/order-confirmation/" + order?.id);
   } catch {
-    handleError("Error processing payment. Please try again.", setIsProcessing);
+    showToast.error("Error processing payment. Please try again.");
   } finally {
     setIsProcessing(false);
   }
