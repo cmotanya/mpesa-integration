@@ -57,9 +57,9 @@ const createOrder = async ({
 
     if (error) throw error;
 
-    if (!data) throw new Error("Order creation failed - no data returned");
+    if (!data) throw new Error("Order not returned from database");
 
-    showToast.success(`Order ${orderNumber} created successfully!`);
+    // showToast.success(`Order ${orderNumber} created successfully!`);
 
     return data as OrderRow;
   } catch (error) {
