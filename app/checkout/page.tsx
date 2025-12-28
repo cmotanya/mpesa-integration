@@ -58,6 +58,7 @@ export const FoodOrderCheckout = () => {
 
         <Fade duration={100} delay={400} direction="up" triggerOnce>
           <Button
+            buttonType="button"
             onClick={() => router.back()}
             className="bg-secondary/10 ring-secondary text-text/80 flex w-full items-center justify-center gap-2 p-4 uppercase ring transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
           >
