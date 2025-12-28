@@ -29,7 +29,7 @@ const createOrder = async ({
     const random = Math.floor(Math.random() * 10000);
     const orderNumber = `ORD-${timestamp}-${random}`;
 
-    const p_order_data = {
+    const orderData = {
       order_number: orderNumber,
       customer_name: address.name.trim(),
       delivery_address:
@@ -43,7 +43,7 @@ const createOrder = async ({
       order_status: "pending",
     };
 
-    const p_items_data = items.map((item) => ({
+    const itemsData = items.map((item) => ({
       menu_item_id: item.id,
       quantity: item.quantity,
       unit_price: Math.round(item.unit_price * 100) / 100,
@@ -51,8 +51,8 @@ const createOrder = async ({
     }));
 
     const { data, error } = await supabase.rpc("create_order_transaction", {
-      order_data: p_order_data,
-      items_data: p_items_data,
+      order_data: orderData,
+      items_data: itemsData,
     });
 
     if (error) throw error;
