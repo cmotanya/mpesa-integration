@@ -90,16 +90,19 @@ export const FoodOrderCheckout = () => {
         </Fade>
 
         <div className="w-full max-w-md space-y-6 p-6">
-          <FormInput
-            control={form.control}
-            name="phoneNumber"
-            label="Confirm Your M-Pesa Phone Number"
-            placeholder="m-pesa number"
-            type="tel"
-            Icon={Smartphone}
-            className="border-mpesa/30 focus:border-mpesa border ring-0"
-          />
           <Fade duration={100} delay={300} direction="up" triggerOnce>
+            <FormInput
+              control={form.control}
+              name="phoneNumber"
+              label="Confirm Your M-Pesa Phone Number"
+              placeholder="m-pesa number"
+              type="tel"
+              Icon={Smartphone}
+              className="border-mpesa/30 focus:border-mpesa border ring-0"
+            />
+          </Fade>
+
+          <Fade duration={100} delay={400} direction="up" triggerOnce>
             {/* MPesa Payment Form */}
             <MPesaPayment isProcessing={isProcessing} />
           </Fade>

@@ -1,7 +1,7 @@
 import CustomLink from "@/components/CustomLink";
 import { Mail, Phone, Clock, Heart } from "lucide-react";
 
-export const Footer = () => {
+export default function Footer() {
   return (
     <footer className="bg-accent/10 border-accent/20 mt-auto w-full border-t">
       <div className="container grid grid-cols-1 gap-8 px-4 py-8 md:grid-cols-3">
@@ -64,4 +64,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+}

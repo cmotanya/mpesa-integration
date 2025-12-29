@@ -5,12 +5,21 @@ export const cartReducer = (
   action: CartActions,
 ): CartState => {
   switch (action.type) {
+    case "SET_DELIVERY_AREA": {
+      return {
+        ...state,
+        area: action.payload.area,
+        fee: action.payload.fee,
+      };
+    }
+
     case "ADD_ITEM": {
       const item = action.payload;
       const existingItem = state.cart.find((i) => i.id === item.id);
 
       if (existingItem) {
         return {
+          ...state,
           cart: state.cart.map((i) =>
             i.id === item.id
               ? { ...i, quantity: i.quantity + item.quantity }
@@ -18,13 +27,14 @@ export const cartReducer = (
           ),
         };
       }
-      return { cart: [...state.cart, { ...item }] };
+      return { ...state, cart: [...state.cart, { ...item }] };
     }
 
     case "UPDATE_QUANTITY": {
       const { itemId, change } = action.payload;
 
       return {
+        ...state,
         cart: state.cart
           .map((item) =>
             item.id === itemId
@@ -39,12 +49,13 @@ export const cartReducer = (
       const { itemId } = action.payload;
 
       return {
+        ...state,
         cart: state.cart.filter((item) => item.id !== itemId),
       };
     }
 
     case "CLEAR_CART": {
-      return { cart: [] };
+      return { ...state, cart: [] };
     }
 
     default:

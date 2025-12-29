@@ -185,3 +185,9 @@ export type OrderSummaryProps = {
   title?: string;
   items: OrderSummaryItemsProps[];
 };
+
+export type DeliveryZonesProps = {
+  id: string;
+  area_name: string;
+  fee: number;
+};

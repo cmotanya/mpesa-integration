@@ -13,25 +13,24 @@ import { cartReducer } from "./cart.reducer";
 import { CartState } from "./cart.types";
 import { getCartFromStorage, saveCartToStorage } from "./cart.storage";
 
-type CartContextType = {
-  cart: CartItem[];
+interface CartContextType extends CartState {
   addToCartItem: (item: CartItem) => void;
-  updateQuantityToCart: (
-    itemId: string,
-    quantity: number,
-    change: number,
-  ) => void;
+  updateQuantityToCart: (itemId: string, change: number) => void;
   removeFromCartItem: (itemId: string) => void;
   clearCart: () => void;
-};
+  cart: CartItem[];
+  setDeliveryArea: (area: string, fee: number) => void;
+}
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const initialCartState = (): CartState => ({
-  cart: getCartFromStorage() || [],
+  cart: [],
+  area: "",
+  fee: 0,
 });
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
+export default function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(
     cartReducer,
     undefined,
@@ -39,8 +38,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
+    const loadData = () => {
+      const savedCart = getCartFromStorage();
+      const savedArea = localStorage.getItem("deliveryArea") || "";
+      const savedFee = Number(localStorage.getItem("deliveryFee") || 0);
+
+      dispatch({
+        type: "SET_CART",
+        payload: { cart: savedCart, area: savedArea, fee: savedFee },
+      });
+    };
+
+    loadData();
+  }, []);
+
+  useEffect(() => {
     saveCartToStorage(state.cart);
   }, [state.cart]);
+
+  const setDeliveryArea = (area: string, fee: number) => {
+    localStorage.setItem("deliveryArea", area);
+    localStorage.setItem("deliveryFee", fee.toString());
+    dispatch({ type: "SET_DELIVERY_AREA", payload: { area, fee } });
+  };
 
   const addToCartItem = (item: CartItem) => {
     dispatch({ type: "ADD_ITEM", payload: item });
@@ -62,16 +82,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     <CartContext.Provider
       value={{
         cart: state.cart,
+        area: state.area,
+        fee: state.fee,
         addToCartItem,
         updateQuantityToCart,
         removeFromCartItem,
         clearCart,
+        setDeliveryArea,
       }}
     >
       {children}
     </CartContext.Provider>
   );
-};
+}
 
 export const useCart = (): CartContextType => {
   const context = useContext(CartContext);

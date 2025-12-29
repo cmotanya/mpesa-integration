@@ -35,6 +35,33 @@ export type Database = {
         }
         Relationships: []
       }
+      delivery_zones: {
+        Row: {
+          area_name: string
+          category: string
+          created_at: string | null
+          fee: number
+          id: string
+          is_active: boolean | null
+        }
+        Insert: {
+          area_name: string
+          category: string
+          created_at?: string | null
+          fee: number
+          id?: string
+          is_active?: boolean | null
+        }
+        Update: {
+          area_name?: string
+          category?: string
+          created_at?: string | null
+          fee?: number
+          id?: string
+          is_active?: boolean | null
+        }
+        Relationships: []
+      }
       menu_items: {
         Row: {
           available: boolean | null

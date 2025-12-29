@@ -1,7 +1,7 @@
 // utils/toast.tsx
 import { Toaster } from "react-hot-toast";
 
-export const AppToast = () => {
+export default function AppToast() {
   return (
     <Toaster
       position="top-center"
@@ -30,4 +30,4 @@ export const AppToast = () => {
       }}
     />
   );
-};
+}

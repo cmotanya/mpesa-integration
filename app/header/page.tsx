@@ -2,7 +2,7 @@ import { Hamburger, Menu } from "lucide-react";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 
-const Header = () => {
+export default function Header() {
   return (
     <header className="border-secondary/50 flex h-20 items-center justify-between border-b px-3">
       <Fade direction="left" duration={100} damping={0.5} triggerOnce>
@@ -17,6 +17,4 @@ const Header = () => {
       </Fade>
     </header>
   );
-};
-
-export default Header;
+}
