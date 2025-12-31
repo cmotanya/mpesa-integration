@@ -14,9 +14,11 @@ const useDeliveryZones = () => {
 
       if (error) throw new Error(error.message);
 
-      return data || [];
+      return data ?? [];
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    retry: 2,
   });
 };
 
